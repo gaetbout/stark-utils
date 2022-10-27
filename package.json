@@ -9,21 +9,12 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@argent/get-starknet": "^0.1.4",
     "@vueform/toggle": "^2.0.1",
-    "base64-js": "^1.5.1",
     "bn.js": "^5.2.0",
     "bootstrap": "4.6.0",
-    "bootstrap-vue": "2.15.0",
-    "crypto": "^1.0.1",
-    "element-plus": "1.0.1-beta.24",
-    "elliptic": "^6.5.4",
-    "hash.js": "^1.1.7",
     "starknet": "^2.9.0",
     "vue": "^3.2.36",
     "vue-router": "4.0.1",
-    "vue-toastification": "^2.0.0-rc.5",
-    "vue3-cookies": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -35,7 +26,6 @@
     "@vue/eslint-config-prettier": "6.0.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-component": "1.1.1",
-    "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-vue": "7.4.1",
