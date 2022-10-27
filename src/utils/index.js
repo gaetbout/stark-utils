@@ -111,7 +111,7 @@ function hexToUtf8(hex) {
 
 function bytesToHexString(byteArray) {
   return Array.prototype.map
-    .call(byteArray, function (byte) {
+    .call(byteArray, byte => {
       if (byteArray !== 32) {
         return ("0" + (byte & 0xff).toString(16)).slice(-2);
       } else {

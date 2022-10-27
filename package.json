@@ -1,9 +1,9 @@
 {
-  "name": "StarkNetUtil",
+  "name": "stark-utils",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "mocha"
@@ -27,16 +27,16 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.10",
-    "@vue/cli-plugin-eslint": "4.5.10",
-    "@vue/cli-plugin-router": "4.5.10",
-    "@vue/cli-service": "4.5.10",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.2.39",
     "@vue/eslint-config-prettier": "6.0.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-component": "1.1.1",
     "chai": "^4.3.4",
-    "eslint": "6.8.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-vue": "7.4.1",
     "mocha": "^9.1.3",
