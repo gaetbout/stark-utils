@@ -39,8 +39,6 @@ export default {
 </script>
 
 <style scoped>
-/* TODO add some global CSS vars */
-
 #snackbar {
     visibility: hidden;
     min-width: 200px;

@@ -1,6 +1,5 @@
 import base64js from "base64-js";
 import BN from "bn.js";
-// import { getStarknet } from "@argent/get-starknet";
 import { stark } from "starknet";
 
 const getSelectorFromName = stark.getSelectorFromName;
@@ -47,12 +46,12 @@ function toHex(val) {
   }
   if (val.startsWith("0x") && isHex(removeHexPrefix(val))) {
     return val;
-  } else if (isDecimal(val)) {
+  }
+  if (isDecimal(val)) {
     const nbn = new BN(val, 10);
     return addHexPrefix(nbn.toString(16));
-  } else {
-    return asciiToHex(val);
   }
+  return asciiToHex(val);
 }
 
 function to256(inVal) {
