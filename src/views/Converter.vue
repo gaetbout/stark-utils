@@ -12,6 +12,7 @@
         <SimpleCopyComponent :dataBag="outBNComp" title="felt:" />
         <SimpleCopyComponent :dataBag="outHexComp" title="hex:" />
         <SimpleCopyComponent :dataBag="outStringComp" title="string:" />
+        <SimpleCopyComponent :dataBag="feltArrayComp" title="felt array:" />
         <ToggleComponent :dataBag="outSelectorComp" title="selector:" />
         <ToggleComponent :dataBag="out256Comp" title="uint256(low high):" />
         <ToggleComponent :dataBag="outBig3" title="Big3(d0 d1 d2):" />
@@ -64,6 +65,10 @@ export default {
       const test = new BN(Number(val));
       const valid = this.isLessThanMaxVal(test);
       return { val, valid };
+    },
+    feltArrayComp() {
+      const val = this.input.split('').reduce((acc, char) => acc + char.charCodeAt(0) + ",", "").slice(0, -1)
+      return { val };
     },
     outSelectorComp() {
       const val = utils.toSelector(this.input);

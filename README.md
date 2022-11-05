@@ -24,6 +24,7 @@ It allows to:
  - Modal to explain each page
  - Some packages are obsolete, get rid of bootstrap ?
  - Do "About" page with link to github
+ - Adding  a way to have dec array to string?
  - On convertor page would a global switch Dec <==> Hex be better?
  - Save selector as local storage? ==> Is the store used or planned to be used? If not ==> Remove it
 
