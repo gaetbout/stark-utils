@@ -1,13 +1,10 @@
-import base64js from "base64-js";
 import BN from "bn.js";
 import { stark } from "starknet";
 
-const getSelectorFromName = stark.getSelectorFromName;
 
 function asciiToHex(str) {
-  var arr1 = [];
-  arr1.push("0x");
-  for (var n = 0, l = str.length; n < l; n++) {
+  let arr1 = ["0x"];
+  for (var n = 0; n < str.length; n++) {
     var hex = Number(str.charCodeAt(n)).toString(16);
     arr1.push(hex);
   }
@@ -15,33 +12,32 @@ function asciiToHex(str) {
 }
 
 function toSelector(val) {
-  if (val === undefined || val === "") {
+  if (!val) {
     return { hexy: "", inty: "" };
   }
-  const hexBN = new BN(removeHexPrefix(getSelectorFromName(val)), 16);
-
-  return { hexy: getSelectorFromName(val), inty: hexBN.toString(10) };
+  const hexBN = new BN(removeHexPrefix(stark.getSelectorFromName(val)), 16);
+  return {  inty: hexBN.toString(10), hexy: stark.getSelectorFromName(val),        };
 }
 
 function toBN(val) {
   if (BN.isBN(val)) {
     return val;
   }
-  if (val === undefined || val === "") {
+  if (!val) {
     return "";
   }
   if (val.startsWith("0x") && isHex(removeHexPrefix(val))) {
     return new BN(removeHexPrefix(val), 16);
-  } else if (isDecimal(val)) {
+  } 
+  if (isDecimal(val)) {
     return new BN(val, 10);
-  } else {
-    const ascHex = asciiToHex(val);
-    return new BN(removeHexPrefix(ascHex), 16);
-  }
+  } 
+  const ascHex = asciiToHex(val);
+  return new BN(removeHexPrefix(ascHex), 16);
 }
 
 function toHex(val) {
-  if (val === undefined || val === "") {
+  if (!val) {
     return "";
   }
   if (val.startsWith("0x") && isHex(removeHexPrefix(val))) {
@@ -54,21 +50,21 @@ function toHex(val) {
   return asciiToHex(val);
 }
 
-function to256(inVal) {
-  if (inVal === undefined || inVal === "") {
+function to256(val) {
+  if (!val){
     return { low: "", high: "" };
   }
   let mask = new BN(2);
   mask = mask.pow(new BN(128));
   mask = mask.sub(new BN(1));
 
-  let bigIn = toBN(inVal);
+  let bigIn = toBN(val);
 
   return { low: bigIn.and(mask), high: bigIn.shrn(128) };
 }
 
 function toBig3(val) {
-  if (val === undefined || val === "") {
+  if (!val) {
     return { D0: "", D1: "", D2: "" };
   }
   let mask = new BN(2);
@@ -76,54 +72,13 @@ function toBig3(val) {
   mask = mask.sub(new BN(1));
   let bigIn = toBN(val);
 
-  let d0 = bigIn.and(mask);
+  let D0 = bigIn.and(mask);
   bigIn = bigIn.shrn(86);
 
-  let d1 = bigIn.and(mask);
-  bigIn = bigIn.shrn(86);
+  let D1 = bigIn.and(mask);
+  let D2 = bigIn.shrn(86);
 
-  return { D0: d0, D1: d1, D2: bigIn };
-}
-
-function parseBig3(slice) {
-  let result = new BN();
-
-  result = result.add(slice.D2);
-  result = result.shln(86);
-  result = result.add(slice.D1);
-  result = result.shln(86);
-  result = result.add(slice.D0);
-
-  return result;
-}
-
-// function utf8ToHex(str) {
-//   return Array.from(str).map(c =>
-//     c.charCodeAt(0) < 128 ? c.charCodeAt(0).toString(16) :
-//     encodeURIComponent(c).replace(/\%/g,'').toLowerCase()
-//   ).join('');
-// }
-
-function hexToUtf8(hex) {
-  return decodeURIComponent("%" + hex.match(/.{1,2}/g).join("%"));
-}
-
-function bytesToHexString(byteArray) {
-  return Array.prototype.map
-    .call(byteArray, function (byte) {
-      if (byteArray !== 32) {
-        return ("0" + (byte & 0xff).toString(16)).slice(-2);
-      } else {
-        return ("" + (byte & 0xff).toString(16)).slice(-2);
-      }
-    })
-    .join("");
-}
-
-function hexToBytes(hex) {
-  for (var bytes = [], c = 0; c < hex.length; c += 2)
-    bytes.push(parseInt(hex.substr(c, 2), 16));
-  return bytes;
+  return { D0, D1, D2 };
 }
 
 function removeHexPrefix(hex) {
@@ -138,23 +93,6 @@ function addHexPrefix(hex) {
   return `0x${removeHexPrefix(hex)}`;
 }
 
-function fmtActiveAccount(hex) {
-  const rmHex = hex.replace(/^0x/, "");
-  return rmHex.replace(/^0/, "");
-}
-
-function bufferEncode(value) {
-  return base64js
-    .fromByteArray(value)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=/g, "");
-}
-
-function base64ToArray(b64) {
-  return base64js.toByteArray(b64);
-}
-
 function isHex(val) {
   const regexp = /^[0-9a-fA-F]+$/;
   return regexp.test(val);
@@ -165,29 +103,14 @@ function isDecimal(val) {
   return decimalRegex.test(val);
 }
 
-function isBase64(val) {
-  var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-  return base64regex.test(val);
-}
-
 export default {
-  asciiToHex,
   toBN,
   removeHexPrefix,
   addHexPrefix,
-  fmtActiveAccount,
   to256,
-  bufferEncode,
-  base64ToArray,
-  bytesToHexString,
-  hexToBytes,
   toBig3,
-  parseBig3,
-  isBase64,
   isDecimal,
-  hexToUtf8,
   toHex,
   toSelector,
   isHex,
-  // utf8ToHex,
 };

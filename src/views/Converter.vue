@@ -59,12 +59,11 @@ export default {
     },
     outStringComp() {
       const hex = utils.toHex(this.input).slice(2);
-      let val = hex.length == 0 ? "" : Buffer.from(hex, 'hex');
-      const inFmt = utils.isDecimal(this.input);
-      const test = new BN(val);
+      if (!hex) return {};
+      const val = hex.toString().match(/.{1,2}/g).reduce((acc, char) => acc + String.fromCharCode(parseInt(char, 16)), "")
+      const test = new BN(Number(val));
       const valid = this.isLessThanMaxVal(test);
-      val = val.toString();
-      return { val, valid, inFmt };
+      return { val, valid };
     },
     outSelectorComp() {
       const val = utils.toSelector(this.input);
