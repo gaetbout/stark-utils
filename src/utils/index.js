@@ -1,7 +1,7 @@
 import BN from "bn.js";
-import { stark } from "starknet";
+import { hash } from "starknet";
 
-
+// TODO possible to update here using latest starknetjs func
 function asciiToHex(str) {
   let arr1 = ["0x"];
   for (var n = 0; n < str.length; n++) {
@@ -15,8 +15,8 @@ function toSelector(val) {
   if (!val) {
     return { hexy: "", inty: "" };
   }
-  const hexBN = new BN(removeHexPrefix(stark.getSelectorFromName(val)), 16);
-  return {  inty: hexBN.toString(10), hexy: stark.getSelectorFromName(val),        };
+  const hexBN = new BN(removeHexPrefix(hash.getSelectorFromName(val)), 16);
+  return { inty: hexBN.toString(10), hexy: hash.getSelectorFromName(val), };
 }
 
 function toBN(val) {
@@ -28,10 +28,10 @@ function toBN(val) {
   }
   if (val.startsWith("0x") && isHex(removeHexPrefix(val))) {
     return new BN(removeHexPrefix(val), 16);
-  } 
+  }
   if (isDecimal(val)) {
     return new BN(val, 10);
-  } 
+  }
   const ascHex = asciiToHex(val);
   return new BN(removeHexPrefix(ascHex), 16);
 }
@@ -51,7 +51,7 @@ function toHex(val) {
 }
 
 function to256(val) {
-  if (!val){
+  if (!val) {
     return { low: "", high: "" };
   }
   let mask = new BN(2);
