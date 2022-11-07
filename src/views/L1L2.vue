@@ -9,9 +9,6 @@
             <h2>L1 &rarr; L2 <i class="fas fa-archway"></i></h2>
         </div>
         <div class="card-body px-lg-5">
-            Only works on testnet
-            <br />
-            <br />
             <ul class="list-group mb-4">
                 <li class="list-group-item">
                     Contract address:
