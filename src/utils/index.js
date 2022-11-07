@@ -1,7 +1,7 @@
 import BN from "bn.js";
 import { hash } from "starknet";
 
-
+// TODO possible to update here using latest starknetjs func
 function asciiToHex(str) {
   let arr1 = ["0x"];
   for (var n = 0; n < str.length; n++) {
