@@ -12,7 +12,7 @@
     "@vueform/toggle": "^2.0.1",
     "bn.js": "^5.2.0",
     "bootstrap": "4.6.0",
-    "starknet": "^2.9.0",
+    "starknet": "^4.9.0",
     "vue": "^3.2.36",
     "vue-router": "4.0.1",
     "vuex": "^4.0.2"
