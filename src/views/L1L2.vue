@@ -11,6 +11,14 @@
         <div class="card-body px-lg-5">
             <ul class="list-group mb-4">
                 <li class="list-group-item">
+                    Transaction hash:
+                    <input v-model="txHash" type="text" class="form-control formy my-3 mr-2  shadow"
+                        placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
+                    <button class="btn btn-sm btn-success" @click="test">
+                        Retrieve info <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </button>
+                </li>
+                <li class="list-group-item">
                     Contract address:
                     <Toggle class="float-right togglePar" v-model="isMainnet" onLabel="Mainnet" offLabel="Testnet" />
                     <input v-model="contractAddress" type="text" class="form-control formy my-3 mr-2  shadow"
@@ -33,8 +41,8 @@
                         placeholder="69106" />
                 </li>
                 <li class="list-group-item">
-                    <button class="btn btn-sm btn-success" style="height: 3rem; width: 100%" @click="test">
-                        Open transaction <i class="fa fa-external-link" aria-hidden="true" disabled></i>
+                    <button class="btn btn-sm btn-success" @click="computeAndOpenL2Tx">
+                        Open transaction <i class="fa fa-external-link" aria-hidden="true"></i>
                     </button>
                 </li>
             </ul>
@@ -63,7 +71,7 @@ export default {
         };
     },
     methods: {
-        test() {
+        computeAndOpenL2Tx() {
             const allCalldata = this.callData.split(",");
             allCalldata.unshift(this.toAddress);
             const chaindId = this.isMainnet ? constants.StarknetChainId.MAINNET : constants.StarknetChainId.TESTNET;
@@ -79,6 +87,9 @@ export default {
                 [this.nonce]
             );
             window.open(url + txHash, '_blank')
+        },
+        test() {
+
         }
     }
 }
@@ -87,6 +98,12 @@ export default {
 <style scoped>
 .list-group-item {
     overflow-x: hidden !important;
+}
+
+button {
+    width: 100%;
+    height: 3rem;
+    font-size: 110%;
 }
 
 /deep/ .toggle {

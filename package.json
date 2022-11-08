@@ -15,7 +15,8 @@
     "starknet": "^4.9.0",
     "vue": "^3.2.36",
     "vue-router": "4.0.1",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "web3": "^1.8.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.8",
