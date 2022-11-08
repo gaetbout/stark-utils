@@ -10,6 +10,8 @@
     -->
         <div class="card-body px-lg-5">
             <ul class="list-group mb-4">
+                <h2> Input a transaction hash or fill in manually every field </h2>
+                <br />
                 <li class="list-group-item">
                     <Toggle class="float-right togglePar" v-model="isMainnet" onLabel="Mainnet" offLabel="Testnet" />
                     Transaction hash:
@@ -20,8 +22,8 @@
                         <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2  shadow"
                             placeholder="1" />
                     </div>
-                    <button class="btn btn-sm btn-success" @click="test">
-                        Retrieve info <i class="fa fa-external-link" aria-hidden="true"></i>
+                    <button class="btn btn-sm btn-success" @click="retrieveInfo">
+                        Retrieve info <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
                     </button>
                 </li>
                 <li class="list-group-item">
@@ -46,7 +48,7 @@
                 </li>
                 <li class="list-group-item">
                     <button class="btn btn-sm btn-success" @click="computeAndOpenL2Tx">
-                        Open transaction <i class="fa fa-external-link" aria-hidden="true"></i>
+                        Open transaction <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                     </button>
                 </li>
             </ul>
@@ -98,7 +100,7 @@ export default {
             );
             window.open(url + txHash, '_blank')
         },
-        async test() {
+        async retrieveInfo() {
             if (!this.txHash) return;
             let web3 = this.getProvider();
             if (!web3) return;
@@ -135,11 +137,11 @@ export default {
                 return;
             }
             if (this.isMainnet && window.ethereum.chainId == "0x5") {
-                alert("Please switch metamask to mainnet");
+                alert("Please switch your wallet to mainnet");
                 return;
             }
             if (!this.isMainnet && window.ethereum.chainId == "0x1") {
-                alert("Please switch metamask to goerli");
+                alert("Please switch your wallet to goerli");
                 return;
             }
             return new Web3(window.ethereum);
