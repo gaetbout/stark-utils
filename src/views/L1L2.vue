@@ -18,6 +18,7 @@
                     <input v-model="txHash" type="text" class="form-control formy my-3 mr-2  shadow"
                         placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
                     <div v-if="shouldAskLogIndex">
+                        <!-- TODO Add animation -->
                         Log index (between 1 and {{ numberOfLogs }}):
                         <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2  shadow"
                             placeholder="1" />
@@ -82,6 +83,7 @@ export default {
         };
     },
     methods: {
+        // TODO Refactor it all
         computeAndOpenL2Tx() {
             // TODO si erreur ==> log some message like "Check network"
             const allCalldata = this.callData.split(",");
@@ -129,6 +131,7 @@ export default {
             }], currentLog.data)
             this.callData = data.payload.toString();
             this.nonce = data.nonce;
+            this.shouldAskLogIndex = false;
         },
         getProvider() {
             // TODO better handle this
