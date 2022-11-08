@@ -7,9 +7,9 @@
       <div class="ec-util">
         <ul v-if="!generated" class="list-group text-center">
           <li class="list-group-item">
-            <div class="btn btn-sm btn-success" @click="getTestKeys">
+            <button class="btn btn-sm btn-success" @click="getTestKeys">
               gen key pair
-            </div>
+            </button>
           </li>
         </ul>
         <ul v-else class="list-group">
@@ -77,13 +77,13 @@
               placeholder="sigS" />
           </div>
           <div class="text-center">
-            <div v-if="!sigChecked" class="btn btn-info" @click="checkSig">
+            <button v-if="!sigChecked" class="btn btn-info" @click="checkSig">
               is_valid?
-            </div>
+            </button>
             <div v-else>
-              <div v-if="sigValid" class="btn btn-success" @click="checkSig">
+              <button v-if="sigValid" class="btn" @click="checkSig">
                 sig valid
-              </div>
+              </button>
               <div v-else class="btn btn-danger" @click="checkSig">sig invalid</div>
             </div>
           </div>
@@ -130,6 +130,8 @@ export default {
       await navigator.clipboard.writeText(text);
     },
     sig() {
+      if (!this.privateKey) return;
+      if (!this.hashData) return;
       const keyPair = ec.getKeyPair(this.privateKey);
       const sig = ec.sign(keyPair, this.hashData);
       if (sig.length == 2) {
@@ -172,3 +174,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

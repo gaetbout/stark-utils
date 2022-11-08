@@ -48,4 +48,16 @@ export default {
 h2 {
   margin-bottom: 0px !important;
 }
+
+button {
+  color: var(--font-white-color) !important;
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+button:hover {
+  color: var(--font-white-color-hover) !important;
+  background-color: var(--secondary-color-hover) !important;
+  border-color: var(--secondary-color-hover) !important;
+}
 </style>
