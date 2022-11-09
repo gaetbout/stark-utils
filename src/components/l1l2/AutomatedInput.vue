@@ -1,17 +1,19 @@
 <template>
-  <Toggle class="float-right togglePar" v-model="isMainnet" onLabel="Mainnet" offLabel="Testnet" />
-  Transaction hash:
-  <input v-model="txHash" type="text" class="form-control formy my-3 mr-2 shadow"
-    placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
-  <div v-if="shouldAskLogIndex">
-    <!-- TODO Add animation -->
-    Log index (between 1 and {{ numberOfLogs }}):
-    <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2 shadow" placeholder="1" />
-  </div>
-  <button class="btn btn-sm btn-success" @click="retrieveInfo">
-    Retrieve info
-    <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-  </button>
+  <li class="list-group-item">
+    <Toggle class="float-right togglePar" v-model="isMainnet" onLabel="Mainnet" offLabel="Testnet" />
+    Transaction hash:
+    <input v-model="txHash" type="text" class="form-control formy my-3 mr-2 shadow"
+      placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
+    <div v-if="shouldAskLogIndex">
+      <!-- TODO Add animation -->
+      Log index (between 1 and {{ numberOfLogs }}):
+      <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2 shadow" placeholder="1" />
+    </div>
+    <button class="btn btn-sm btn-success" @click="retrieveInfo">
+      Retrieve info
+      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+    </button>
+  </li>
 </template>
 
 <script>
@@ -126,10 +128,6 @@ export default {
 };
 </script>
 <style scoped>
-.list-group-item {
-  overflow-x: hidden !important;
-}
-
 button {
   width: 100%;
   height: 3rem;

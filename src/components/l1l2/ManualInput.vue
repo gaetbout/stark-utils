@@ -1,5 +1,4 @@
 <template>
-
   <li class="list-group-item">
     Contract address:
     <input v-model="contractAddress" type="text" class="form-control formy my-3 mr-2 shadow"
