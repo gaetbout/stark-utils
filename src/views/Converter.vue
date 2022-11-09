@@ -4,8 +4,12 @@
       <h2>Convertor &nbsp;&nbsp;<i class="fas fa-random"></i></h2>
     </div>
     <div class="card-body px-lg-5">
-      <input v-model="input" type="text" class="form-control formy mt-2 mb-4 text-center shadow"
-        placeholder="input..." />
+      <input
+        v-model="input"
+        type="text"
+        class="form-control formy mt-2 mb-4 text-center shadow"
+        placeholder="input..."
+      />
       <!-- TODO check every inFmt -->
       <!-- TODO check every isValid -->
       <ul class="list-group mb-4">
@@ -29,7 +33,7 @@ import BN from "bn.js";
 export default {
   components: {
     SimpleCopyComponent,
-    ToggleComponent
+    ToggleComponent,
   },
   data() {
     return {
@@ -45,7 +49,7 @@ export default {
   computed: {
     outBNComp() {
       const val = utils.toBN(this.input).toString(10);
-      const inFmt = utils.isDecimal(this.input)
+      const inFmt = utils.isDecimal(this.input);
       const test = new BN(val);
       const valid = this.isLessThanMaxVal(test);
       return { val, valid, inFmt };
@@ -61,13 +65,22 @@ export default {
     outStringComp() {
       const hex = utils.toHex(this.input).slice(2);
       if (!hex) return {};
-      const val = hex.toString().match(/.{1,2}/g).reduce((acc, char) => acc + String.fromCharCode(parseInt(char, 16)), "")
+      const val = hex
+        .toString()
+        .match(/.{1,2}/g)
+        .reduce(
+          (acc, char) => acc + String.fromCharCode(parseInt(char, 16)),
+          ""
+        );
       const test = new BN(Number(val));
       const valid = this.isLessThanMaxVal(test);
       return { val, valid };
     },
     feltArrayComp() {
-      const val = this.input.split('').reduce((acc, char) => acc + char.charCodeAt(0) + ",", "").slice(0, -1)
+      const val = this.input
+        .split("")
+        .reduce((acc, char) => acc + char.charCodeAt(0) + ",", "")
+        .slice(0, -1);
       return { val };
     },
     outSelectorComp() {
@@ -75,12 +88,20 @@ export default {
       const inFmt = !utils.isDecimal(this.input) && !this.isHexInput();
       const test = new BN(utils.toBN(val.inty));
       const valid = this.isLessThanMaxVal(test);
-      return { intValues: [val.inty.toString()], hexValues: [val.hexy.toString()], valid, inFmt };
+      return {
+        intValues: [val.inty.toString()],
+        hexValues: [val.hexy.toString()],
+        valid,
+        inFmt,
+      };
     },
     out256Comp() {
       const val256 = utils.to256(this.input);
-      const intValues = [val256.low.toString(), val256.high.toString()]
-      const hexValues = [utils.addHexPrefix(val256.low.toString(16)), utils.addHexPrefix(val256.high.toString(16))]
+      const intValues = [val256.low.toString(), val256.high.toString()];
+      const hexValues = [
+        utils.addHexPrefix(val256.low.toString(16)),
+        utils.addHexPrefix(val256.high.toString(16)),
+      ];
       const test = new BN(intValues[1]);
       const valid = this.isLessThanMaxValHigh(test);
       return { intValues, hexValues, valid };
@@ -90,12 +111,12 @@ export default {
       const intValues = [
         valBig3.D0.toString(),
         valBig3.D1.toString(),
-        valBig3.D2.toString()
+        valBig3.D2.toString(),
       ];
       const hexValues = [
         utils.addHexPrefix(valBig3.D0.toString(16)),
         utils.addHexPrefix(valBig3.D1.toString(16)),
-        utils.addHexPrefix(valBig3.D2.toString(16))
+        utils.addHexPrefix(valBig3.D2.toString(16)),
       ];
       const test = new BN(valBig3.D2);
       const valid = this.isLessThanMaxValD2(test);
@@ -104,16 +125,19 @@ export default {
   },
   methods: {
     isLessThanMaxVal(input) {
-      return input.lte(this.MAX_VAL)
+      return input.lte(this.MAX_VAL);
     },
     isLessThanMaxValHigh(input) {
-      return input.lte(this.MAX_VAL_HIGH)
+      return input.lte(this.MAX_VAL_HIGH);
     },
     isLessThanMaxValD2(input) {
-      return input.lte(this.MAX_VAL_D2)
+      return input.lte(this.MAX_VAL_D2);
     },
     isHexInput() {
-      return this.input.startsWith("0x") && utils.isHex(utils.removeHexPrefix(this.input));
+      return (
+        this.input.startsWith("0x") &&
+        utils.isHex(utils.removeHexPrefix(this.input))
+      );
     },
   },
 };

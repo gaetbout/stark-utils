@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import Router from '@/components/Router.vue';
+import Header from "@/components/Header.vue";
+import Router from "@/components/Router.vue";
 
 export default {
   components: {
     Header,
-    Router
+    Router,
   },
 };
 </script>

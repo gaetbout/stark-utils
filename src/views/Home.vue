@@ -7,9 +7,7 @@
     </div>
   </div>
 </template>
-<script>
-
-</script>
+<script></script>
 <style scoped>
 h1 {
   font-size: 8vw;
