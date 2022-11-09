@@ -1,57 +1,30 @@
 <template>
-  <div class="card bg-secondary shadow border-0">
-    <div class="card-header text-center">
-      <h2>L1 &rarr; L2 <i class="fas fa-archway"></i></h2>
-    </div>
-    <!-- This uses
-    https://stackoverflow.com/questions/72239816/checking-result-of-an-l1-l2-message-invoke-in-starknet  
-    https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=0x56b7c13c0008f78d4cb4e39f993d7ed9921bf140f54966574d84d9c7dd80702
-    https://docs.starknet.io/documentation/develop/L1-L2_Communication/messaging-mechanism/
-    -->
-    <div class="card-body px-lg-5">
-      <ul class="list-group mb-4">
-        <br />
-        <button class="collapsible" @click="toggleSections"> I want to input a tx hash
-          <i v-if="firstSectionOpened" class="fa fa-arrow-circle-up float-right" aria-hidden="true"></i>
-          <i v-else class="fa fa-arrow-circle-down float-right" aria-hidden="true"></i>
-        </button>
-        <div v-show="firstSectionOpened">
-          <li class="list-group-item">
-            <AutomatedInput />
-          </li>
-        </div>
-        <button class="collapsible" @click="toggleSections"> I want to input the data myself
-          <i v-if="!firstSectionOpened" class="fa fa-arrow-circle-up float-right" aria-hidden="true"></i>
-          <i v-else class="fa fa-arrow-circle-down float-right" aria-hidden="true"></i>
-        </button>
-        <div v-show="!firstSectionOpened">
-          <li class="list-group-item">
-            <ManualInput />
-          </li>
-        </div>
-        <li class="list-group-item">
-          <button class="btn btn-sm btn-success" @click="computeAndOpenL2Tx">
-            Open transaction
-            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-          </button>
-        </li>
-      </ul>
-    </div>
+  <Toggle class="float-right togglePar" v-model="isMainnet" onLabel="Mainnet" offLabel="Testnet" />
+  Transaction hash:
+  <input v-model="txHash" type="text" class="form-control formy my-3 mr-2 shadow"
+    placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
+  <div v-if="shouldAskLogIndex">
+    <!-- TODO Add animation -->
+    Log index (between 1 and {{ numberOfLogs }}):
+    <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2 shadow" placeholder="1" />
   </div>
+  <button class="btn btn-sm btn-success" @click="retrieveInfo">
+    Retrieve info
+    <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+  </button>
 </template>
 
 <script>
 import { hash } from "starknet";
 import Web3 from "web3";
 import { constants } from "starknet";
-import ManualInput from '@/components/l1l2/ManualInput.vue';
-import AutomatedInput from '@/components/l1l2/AutomatedInput.vue';
+import Toggle from "@vueform/toggle";
 
 
 export default {
+  name: "AutomatedInput",
   components: {
-    ManualInput,
-    AutomatedInput,
+    Toggle,
   },
   data() {
     return {
@@ -65,7 +38,8 @@ export default {
       shouldAskLogIndex: false,
       logIndex: 1,
       numberOfLogs: "",
-      firstSectionOpened: true,
+      txHashSectionExtended: true,
+      inputSectionExtended: false,
     };
   },
   methods: {
@@ -148,9 +122,6 @@ export default {
       }
       return new Web3(window.ethereum);
     },
-    toggleSections() {
-      this.firstSectionOpened = !this.firstSectionOpened;
-    },
   },
 };
 </script>
@@ -165,24 +136,13 @@ button {
   font-size: 110%;
 }
 
-.collapsible {
-  background-color: #eee !important;
-  color: #444 !important;
-  cursor: pointer;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
+
+
+/deep/ .toggle {
+  width: 75px;
 }
 
-
-.content {
-  display: none;
-}
-
-.collapsible:hover {
-  background-color: #ccc !important;
+/deep/ .toggle-label {
+  width: 57px;
 }
 </style>
