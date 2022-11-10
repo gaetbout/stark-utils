@@ -10,6 +10,7 @@
 <script>
 
 export default {
+  name: "ExpandableSection",
   props: {
     isOpened: Boolean,
     title: String,
@@ -18,6 +19,12 @@ export default {
 </script>
 
 <style scoped>
+button {
+  width: 100%;
+  height: 3rem;
+  font-size: 110%;
+}
+
 .collapsible {
   background-color: #eee !important;
   color: #444 !important;

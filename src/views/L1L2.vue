@@ -9,31 +9,39 @@
     https://docs.starknet.io/documentation/develop/L1-L2_Communication/messaging-mechanism/
     -->
     <div class="card-body px-lg-5">
-      <ToggleSection @toggle="toggleSections" :isOpened="firstSectionOpened" title="Automated input"></ToggleSection>
-      <div v-if="firstSectionOpened">
-        <AutomatedInput />
+      <div v-if="hasMetamask()">
+
+        <div class="title">
+          <h2>Every transaction uses your metamask network</h2>
+        </div>
+        <ExpandableSection @toggle="toggleSections" :isOpened="firstSectionOpened" title="Automated input (easy mode)">
+        </ExpandableSection>
+        <div v-if="firstSectionOpened">
+          <AutomatedInput :isMainnet="isMainnet()" />
+        </div>
+        <ExpandableSection @toggle="toggleSections" :isOpened="!firstSectionOpened"
+          title="Manual input (advanced mode)">
+        </ExpandableSection>
+        <div v-if="!firstSectionOpened">
+          <ManualInput :isMainnet="isMainnet()" />
+        </div>
       </div>
-      <ToggleSection @toggle="toggleSections" :isOpened="!firstSectionOpened" title="Manual input"></ToggleSection>
-      <div v-if="!firstSectionOpened">
-        <ManualInput />
+      <div v-else>
+        <h1>Please install a wallet like metamask</h1>
       </div>
-      <button class="btn" @click="computeAndOpenL2Tx">
-        Open transaction
-        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-      </button>
     </div>
   </div>
 </template>
 <script>
 import ManualInput from '@/components/l1l2/ManualInput.vue';
 import AutomatedInput from '@/components/l1l2/AutomatedInput.vue';
-import ToggleSection from '@/components/l1l2/ToggleSection.vue';
+import ExpandableSection from '@/components/l1l2/ExpandableSection.vue';
 
 export default {
   components: {
     ManualInput,
     AutomatedInput,
-    ToggleSection,
+    ExpandableSection,
   },
   data() {
     return {
@@ -44,22 +52,21 @@ export default {
     toggleSections() {
       this.firstSectionOpened = !this.firstSectionOpened;
     },
+    hasMetamask() {
+      return (window.ethereum != undefined)
+    },
+    isMainnet() {
+      return window.ethereum.networkVersion == 1
+    }
   },
 };
 </script>
 <style scoped>
-button {
-  width: 100%;
-  height: 3rem;
-  font-size: 110%;
+h2 {
+  text-align: center;
 }
 
-
-.list-group-item {
-  overflow-x: hidden;
-}
-
-.btn {
-  margin-top: 24px;
+.title {
+  margin-bottom: 24px;
 }
 </style>

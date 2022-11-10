@@ -49,6 +49,10 @@ h2 {
   margin-bottom: 0px !important;
 }
 
+.list-group-item {
+  overflow-x: hidden !important;
+}
+
 button {
   color: var(--font-white-color) !important;
   background-color: var(--secondary-color) !important;

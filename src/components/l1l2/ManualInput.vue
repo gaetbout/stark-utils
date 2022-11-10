@@ -16,6 +16,12 @@
     <!-- 1393428179030720295440092695193628168230707649901849797435563042612822742693, 11819812303435348947619, 0 -->
     Nonce:
     <input v-model="nonce" type="number" class="form-control formy my-3 mr-2 shadow" placeholder="69106" />
+    <button class="btn" @click="computeAndOpenL2Tx">
+      Open transaction
+    </button>
+    <div class="alertMessage">
+      {{ txMessage }}
+    </div>
   </li>
 </template>
 
@@ -25,6 +31,9 @@ import { constants } from "starknet";
 
 export default {
   name: "ManualInput",
+  props: {
+    isMainnet: Boolean,
+  },
   data() {
     return {
       contractAddress: "",
@@ -32,14 +41,12 @@ export default {
       entryPointSelector: "",
       nonce: "",
       callData: "",
-      isMainnet: false,
-      shouldAskLogIndex: false,
+      txMessage: "",
     };
   },
   methods: {
     // TODO Refactor it all
     computeAndOpenL2Tx() {
-      // TODO si erreur ==> log some message like "Check network"
       const allCalldata = this.callData.split(",");
       const chaindId = this.isMainnet
         ? constants.StarknetChainId.MAINNET
@@ -59,7 +66,23 @@ export default {
         [this.nonce]
       );
       window.open(url + txHash, "_blank");
+      this.txMessage = "If the transaction isn't found check your metamask network"
     },
   },
 };
 </script>
+<style scoped>
+button {
+  width: 100%;
+  height: 3rem;
+  font-size: 110%;
+}
+
+.alertMessage {
+  text-align: center;
+  color: var(--secondary-color);
+  margin-top: 24px;
+  font-size: 1.25rem;
+
+}
+</style>
