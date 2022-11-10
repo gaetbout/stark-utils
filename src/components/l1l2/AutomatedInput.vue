@@ -5,6 +5,10 @@
       placeholder="Paste here your transaction hash..." />
     <h2 v-show="isLoading">Loading....</h2>
     <h2 v-show="hashError">Incorrect tx hash</h2>
+    <div v-show="showWrongNetworkMessage">
+      <h2>You might be using the wrong network</h2>
+      <h3> Change your current metamask chain</h3>
+    </div>
     <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
       {{ txHashUrl }}
       <br />
@@ -29,20 +33,26 @@ export default {
       allTxs: [],
       isLoading: false,
       hashError: false,
+      showWrongNetworkMessage: false,
     };
   },
   methods: {
     fetchL2Logs() {
       this.allTxs = [];
       this.hashError = false;
+      this.showWrongNetworkMessage = false;
       if (!this.txHash) return;
       this.isLoading = true;
       const web3 = new Web3(window.ethereum);
       web3.eth.getTransactionReceipt(this.txHash, (error, txReceipt) => {
-        console.log(error)
         if (error) {
           this.isLoading = false;
           this.hashError = true;
+          return;
+        }
+        if (!txReceipt) {
+          this.isLoading = false;
+          this.showWrongNetworkMessage = true;
           return;
         }
         const log2Selector =
@@ -87,6 +97,10 @@ export default {
 </script>
 <style scoped>
 h2 {
+  text-align: center;
+}
+
+h3 {
   text-align: center;
 }
 

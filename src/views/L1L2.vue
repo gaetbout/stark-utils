@@ -13,8 +13,7 @@
       <div v-if="hasMetamask()">
 
         <div class="title">
-          <h2>For mainnet tx set you metamask to ethereum mainnet</h2>
-          <h2>For testnet tx set you metamask to goerli testnet</h2>
+          <h2>This only works with ethereum Mainnet and Goerli</h2>
         </div>
         <ExpandableSection @toggle="toggleSections" :isOpened="firstSectionOpened" title="Automated input (easy mode)">
         </ExpandableSection>
