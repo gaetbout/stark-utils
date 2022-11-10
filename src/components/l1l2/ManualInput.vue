@@ -45,13 +45,10 @@ export default {
     };
   },
   methods: {
-    // TODO Refactor it all
     computeAndOpenL2Tx() {
-      const allCalldata = this.callData.split(",");
       const chaindId = this.isMainnet
         ? constants.StarknetChainId.MAINNET
         : constants.StarknetChainId.TESTNET;
-      allCalldata.unshift(this.toAddress);
       const url = this.isMainnet
         ? "https://starkscan.co/tx/"
         : "https://testnet.starkscan.co/tx/";
@@ -60,7 +57,7 @@ export default {
         "0", // version
         this.contractAddress,
         this.entryPointSelector,
-        allCalldata, // toAddress + calldata
+        [this.toAddress, ...this.callData.split(",")], // toAddress + calldata
         "0", // maxFee
         chaindId, // chainId
         [this.nonce]

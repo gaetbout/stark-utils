@@ -3,9 +3,9 @@
     Transaction hash:
     <input v-model="txHash" type="text" v-on:input="fetchL2Logs" class="form-control formy my-3 mr-2 shadow"
       placeholder="Paste here your transaction hash..." />
-    <p v-for="txHashUrl in allTxs" :key="txHashUrl">
+    <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="txHashUrl" target="_blank">
       {{ txHashUrl }}
-    </p>
+    </a>
   </li>
 </template>
 
@@ -23,19 +23,15 @@ export default {
   data() {
     return {
       txHash: "",
-      contractAddress: "",
-      toAddress: "",
-      entryPointSelector: "",
-      nonce: "",
-      callData: "",
       allTxs: [],
     };
   },
   methods: {
     async fetchL2Logs() {
-      if (!this.txHash) return;
       this.allTxs = [];
+      if (!this.txHash) return;
       // TODO Set loading state
+      // TODO merge automated and manual input in 1 file 
       let web3 = new Web3(window.ethereum);
       let result = await web3.eth.getTransactionReceipt(this.txHash);
       const log2Selector =
@@ -57,16 +53,12 @@ export default {
           },],
           currentLog.data
         );
-        this.callData = data.payload.toString();
-        const allCalldata = this.callData.split(",");
-        allCalldata.unshift(currentLog.topics[1]); // To address
-
         const claculatedHash = hash.calculateTransactionHashCommon(
           constants.TransactionHashPrefix.L1_HANDLER, // txHashPrefix
           "0", // version
           currentLog.topics[2], // contractAddress
           currentLog.topics[3], // entryPointSelector
-          allCalldata, // toAddress + calldata
+          [currentLog.topics[1], ...data.payload.toString().split(",")], // toAddress + calldata
           "0", // maxFee
           chaindId, // chainId
           [data.nonce]
@@ -88,15 +80,5 @@ button {
   width: 100%;
   height: 3rem;
   font-size: 110%;
-}
-
-
-
-/deep/ .toggle {
-  width: 75px;
-}
-
-/deep/ .toggle-label {
-  width: 57px;
 }
 </style>
