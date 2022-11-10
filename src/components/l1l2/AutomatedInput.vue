@@ -1,16 +1,11 @@
 <template>
   <li class="list-group-item">
     Transaction hash:
-    <input v-model="txHash" type="text" class="form-control formy my-3 mr-2 shadow"
-      placeholder="0x035ee021f94d527939c991b0ee27023046fbe218483befb350326bcb935831d6" />
-    <div v-if="shouldAskLogIndex">
-      <!-- TODO Add animation -->
-      Log index (between 1 and {{ numberOfLogs }}):
-      <input v-model="logIndex" type="number" class="form-control formy my-3 mr-2 shadow" placeholder="1" />
-    </div>
-    <button class="btn btn-sm btn-success" @click="retrieveInfo">
-      Retrieve info
-    </button>
+    <input v-model="txHash" type="text" v-on:input="fetchL2Logs" class="form-control formy my-3 mr-2 shadow"
+      placeholder="Paste here your transaction hash..." />
+    <p v-for="txHashUrl in allTxs" :key="txHashUrl">
+      {{ txHashUrl }}
+    </p>
   </li>
 </template>
 
@@ -33,76 +28,57 @@ export default {
       entryPointSelector: "",
       nonce: "",
       callData: "",
-      shouldAskLogIndex: false,
-      logIndex: 1,
-      numberOfLogs: "",
-      txHashSectionExtended: true,
-      inputSectionExtended: false,
+      allTxs: [],
     };
   },
   methods: {
-    // TODO Refactor it all
-    computeAndOpenL2Tx() {
-      // TODO si erreur ==> log some message like "Check network"
-      const allCalldata = this.callData.split(",");
-      const chaindId = this.isMainnet
-        ? constants.StarknetChainId.MAINNET
-        : constants.StarknetChainId.TESTNET;
-      allCalldata.unshift(this.toAddress);
-      const url = this.isMainnet
-        ? "https://starkscan.co/tx/"
-        : "https://testnet.starkscan.co/tx/";
-      const claculatedHash = hash.calculateTransactionHashCommon(
-        constants.TransactionHashPrefix.L1_HANDLER, // txHashPrefix
-        "0", // version
-        this.contractAddress,
-        this.entryPointSelector,
-        allCalldata, // toAddress + calldata
-        "0", // maxFee
-        chaindId, // chainId
-        [this.nonce]
-      );
-      window.open(url + claculatedHash, "_blank");
-    },
-    async retrieveInfo() {
+    async fetchL2Logs() {
       if (!this.txHash) return;
+      this.allTxs = [];
+      // TODO Set loading state
       let web3 = new Web3(window.ethereum);
-      if (!web3) return;
       let result = await web3.eth.getTransactionReceipt(this.txHash);
       const log2Selector =
         "0x9592d37825c744e33fa80c469683bbd04d336241bb600b574758efd182abe26a"; // ConsumedMessageToL2 selector
       let allLog2Logs = result.logs.filter(
         (log) => log.topics[0] == log2Selector
       );
-      if (allLog2Logs.length > 1 && !this.shouldAskLogIndex) {
-        this.shouldAskLogIndex = true;
-        return;
-      }
-      if (this.logIndex > allLog2Logs.length) {
-        alert("Log index incorrect");
-        return;
-      }
-      let currentLog = allLog2Logs[this.logIndex - 1];
-      this.toAddress = currentLog.topics[1];
-      this.contractAddress = currentLog.topics[2];
-      this.entryPointSelector = currentLog.topics[3];
-
-      let data = web3.eth.abi.decodeLog(
-        [
-          {
+      const url = this.getUrl();
+      const chaindId = this.getChaindId();
+      allLog2Logs.forEach(currentLog => {
+        let data = web3.eth.abi.decodeLog(
+          [{
             type: "uint256[]",
             name: "payload",
           },
           {
             type: "uint256",
             name: "nonce",
-          },
-        ],
-        currentLog.data
-      );
-      this.callData = data.payload.toString();
-      this.nonce = data.nonce;
-      this.shouldAskLogIndex = false;
+          },],
+          currentLog.data
+        );
+        this.callData = data.payload.toString();
+        const allCalldata = this.callData.split(",");
+        allCalldata.unshift(currentLog.topics[1]); // To address
+
+        const claculatedHash = hash.calculateTransactionHashCommon(
+          constants.TransactionHashPrefix.L1_HANDLER, // txHashPrefix
+          "0", // version
+          currentLog.topics[2], // contractAddress
+          currentLog.topics[3], // entryPointSelector
+          allCalldata, // toAddress + calldata
+          "0", // maxFee
+          chaindId, // chainId
+          [data.nonce]
+        );
+        this.allTxs.push(url + claculatedHash)
+      })
+    },
+    getUrl() {
+      return this.isMainnet ? "https://starkscan.co/tx/" : "https://testnet.starkscan.co/tx/";
+    },
+    getChaindId() {
+      return this.isMainnet ? constants.StarknetChainId.MAINNET : constants.StarknetChainId.TESTNET;
     },
   },
 };
