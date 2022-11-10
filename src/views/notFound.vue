@@ -1,7 +1,7 @@
 <template>
   <div class="pt-6">
-    <h1 class="pt-4 text-center">Page not found</h1>
-    <h2 class="pt-4 text-center">Proof incorrect</h2>
+    <h1 class="pt-4 text-center">Proof invalid</h1>
+    <h2 class="pt-4 text-center">Page not found</h2>
     <div class="text-center sm-6 pt-5">
       <a @click="goBack">Go back</a>
     </div>

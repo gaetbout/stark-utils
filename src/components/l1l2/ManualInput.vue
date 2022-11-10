@@ -46,12 +46,6 @@ export default {
   },
   methods: {
     computeAndOpenL2Tx() {
-      const chaindId = this.isMainnet
-        ? constants.StarknetChainId.MAINNET
-        : constants.StarknetChainId.TESTNET;
-      const url = this.isMainnet
-        ? "https://starkscan.co/tx/"
-        : "https://testnet.starkscan.co/tx/";
       const txHash = hash.calculateTransactionHashCommon(
         constants.TransactionHashPrefix.L1_HANDLER, // txHashPrefix
         "0", // version
@@ -59,11 +53,17 @@ export default {
         this.entryPointSelector,
         [this.toAddress, ...this.callData.split(",")], // toAddress + calldata
         "0", // maxFee
-        chaindId, // chainId
+        this.getChaindId(), // chainId
         [this.nonce]
       );
-      window.open(url + txHash, "_blank");
+      window.open(this.getUrl() + txHash, "_blank");
       this.txMessage = "If the transaction isn't found check your metamask network"
+    },
+    getUrl() {
+      return this.isMainnet ? "https://starkscan.co/tx/" : "https://testnet.starkscan.co/tx/";
+    },
+    getChaindId() {
+      return this.isMainnet ? constants.StarknetChainId.MAINNET : constants.StarknetChainId.TESTNET;
     },
   },
 };

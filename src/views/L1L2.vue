@@ -13,7 +13,8 @@
       <div v-if="hasMetamask()">
 
         <div class="title">
-          <h2>Every transaction uses your metamask network</h2>
+          <h2>For mainnet tx set you metamask to ethereum mainnet</h2>
+          <h2>For testnet tx set you metamask to goerli testnet</h2>
         </div>
         <ExpandableSection @toggle="toggleSections" :isOpened="firstSectionOpened" title="Automated input (easy mode)">
         </ExpandableSection>
