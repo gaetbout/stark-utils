@@ -9,10 +9,15 @@
       <h2>You might be using the wrong network</h2>
       <h3> Change your current metamask chain</h3>
     </div>
-    <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
-      {{ txHashUrl }}
-      <br />
-    </a>
+
+    <div v-show="allTxs.length">
+      <h2 v-if="allTxs.length == 1">Found 1 message to l2</h2>
+      <h2 v-else>Found {{ allTxs.length }} messages to l2</h2>
+      <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
+        {{ txHashUrl }}
+        <br />
+      </a>
+    </div>
   </li>
 </template>
 
@@ -37,6 +42,9 @@ export default {
     };
   },
   methods: {
+    hasTxs() {
+      return this.allTxs.size > 0
+    },
     fetchL2Logs() {
       this.allTxs = [];
       this.hashError = false;
@@ -110,7 +118,56 @@ button {
   font-size: 110%;
 }
 
+body:before {
+  content: '';
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 a {
-  font-size: .9rem;
+  display: block;
+  text-align: center;
+  background: var(--secondary-color);
+  padding: 14px;
+  margin: 14px;
+  height: 3rem;
+  color: var(--font-white-color);
+  font-size: clamp(12px, .9vw, 18px);
+  border: none;
+  position: relative;
+  transition: 800ms ease all;
+  outline: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background: var(--font-white-color);
+  color: var(--secondary-color);
+}
+
+a:before,
+a:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: var(--secondary-color);
+  transition: 400ms ease all;
+}
+
+a:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+a:hover:before,
+a:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
 }
 </style>

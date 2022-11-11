@@ -11,7 +11,6 @@
     <!-- TODO Switch to TABs -->
     <div class="card-body px-lg-5">
       <div v-if="hasMetamask()">
-
         <div class="title">
           <h2>This only works with ethereum Mainnet and Goerli</h2>
         </div>
