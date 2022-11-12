@@ -8,7 +8,6 @@
     https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=0x56b7c13c0008f78d4cb4e39f993d7ed9921bf140f54966574d84d9c7dd80702
     https://docs.starknet.io/documentation/develop/L1-L2_Communication/messaging-mechanism/
     -->
-    <!-- TODO Switch to TABs -->
     <div class="card-body px-lg-5">
       <div v-if="hasMetamask()">
         <div class="title">

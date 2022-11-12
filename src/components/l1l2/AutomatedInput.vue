@@ -1,28 +1,30 @@
 <template>
   <li class="list-group-item">
     Transaction hash:
+    <!-- TODO change each input by a personal component with an x at the end to delete it? -->
     <input v-model="txHash" type="text" v-on:input="fetchL2Logs" class="form-control formy my-3 mr-2 shadow"
       placeholder="Paste here your transaction hash..." />
-    <h2 v-show="isLoading">Loading....</h2>
+    <Loader v-show="isLoading" />
     <h2 v-show="hashError">Incorrect tx hash</h2>
     <div v-show="showWrongNetworkMessage">
       <h2>You might be using the wrong network</h2>
       <h3> Change your current metamask chain</h3>
     </div>
-
-    <div v-show="allTxs.length">
-      <h2 v-if="allTxs.length == 1">Found 1 message to l2</h2>
-      <h2 v-else>Found {{ allTxs.length }} messages to l2</h2>
-      <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
-        {{ txHashUrl }}
-        <br />
-      </a>
-    </div>
+  </li>
+  <!-- TODO Break this in a list instead of buttons -->
+  <li v-show="allTxs.length" class="list-group-item">
+    <h2 v-if="allTxs.length == 1">Found 1 message to l2</h2>
+    <h2 v-else>Found {{ allTxs.length }} messages to l2</h2>
+    <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
+      {{ txHashUrl }}
+      <br />
+    </a>
   </li>
 </template>
 
 <script>
 import { hash } from "starknet";
+import Loader from '@/components/l1l2/Loader.vue';
 import Web3 from "web3";
 import { constants } from "starknet";
 
@@ -31,6 +33,9 @@ export default {
   name: "AutomatedInput",
   props: {
     isMainnet: Boolean,
+  },
+  components: {
+    Loader
   },
   data() {
     return {
