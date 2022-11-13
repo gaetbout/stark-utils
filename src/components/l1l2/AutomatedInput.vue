@@ -3,7 +3,11 @@
     Transaction hash:
     <!-- TODO change each input by a personal component with an x at the end to delete it? -->
     <input v-model="txHash" type="text" v-on:input="fetchL2Logs" class="form-control formy my-3 mr-2 shadow"
-      placeholder="Paste here your transaction hash..." />
+      placeholder="Paste here your L1 transaction hash..." />
+    <!-- Tx hash for 5 msgs to l2 (testnet)
+      0x4f50619fb21608b9609345da8262d2387b09741ee64bc2b37e92cbb58e3c84c9
+      tx hahs for 1 msg to l2 (testnet) 
+    0x04673cbd71e2439a7e902737e3039e6904b11b06bc8f3dd5dd8f83825eadacaa-->
     <Loader v-show="isLoading" />
     <h2 v-show="hashError">Incorrect tx hash</h2>
     <div v-show="showWrongNetworkMessage">
@@ -11,14 +15,16 @@
       <h3> Change your current metamask chain</h3>
     </div>
   </li>
-  <!-- TODO Break this in a list instead of buttons -->
   <li v-show="allTxs.length" class="list-group-item">
-    <h2 v-if="allTxs.length == 1">Found 1 message to l2</h2>
-    <h2 v-else>Found {{ allTxs.length }} messages to l2</h2>
-    <a v-for="txHashUrl in allTxs" :key="txHashUrl" :href="getUrl() + txHashUrl" target="_blank">
-      {{ txHashUrl }}
-      <br />
-    </a>
+    <p>Found {{ getMessageText() }} to l2 (click to open):</p>
+    <ul>
+      <li v-for="txHashUrl in allTxs" :key="txHashUrl">
+        <a :href="getUrl() + txHashUrl" target="_blank">
+          {{ txHashUrl }}
+          <br />
+        </a>
+      </li>
+    </ul>
   </li>
 </template>
 
@@ -105,6 +111,9 @@ export default {
     getChaindId() {
       return this.isMainnet ? constants.StarknetChainId.MAINNET : constants.StarknetChainId.TESTNET;
     },
+    getMessageText() {
+      return this.allTxs.length == 1 ? "1 message" : (this.allTxs.length + " messages")
+    },
   },
 };
 </script>
@@ -130,49 +139,21 @@ body:before {
   vertical-align: middle;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 a {
   display: block;
-  text-align: center;
-  background: var(--secondary-color);
-  padding: 14px;
-  margin: 14px;
-  height: 3rem;
-  color: var(--font-white-color);
-  font-size: clamp(12px, .9vw, 18px);
-  border: none;
-  position: relative;
-  transition: 800ms ease all;
-  outline: none;
-  text-transform: uppercase;
+  font-size: clamp(12px, 1.1vw, 24px);
+  padding-left: 10px;
+  color: var(--main-color);
+  padding-bottom: 14px;
 }
 
 a:hover {
-  background: var(--font-white-color);
-  color: var(--secondary-color);
-}
-
-a:before,
-a:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 2px;
-  width: 0;
-  background: var(--secondary-color);
-  transition: 400ms ease all;
-}
-
-a:after {
-  right: inherit;
-  top: inherit;
-  left: 0;
-  bottom: 0;
-}
-
-a:hover:before,
-a:hover:after {
-  width: 100%;
-  transition: 800ms ease all;
+  font-size: clamp(13px, 1.11vw, 25px);
 }
 </style>
