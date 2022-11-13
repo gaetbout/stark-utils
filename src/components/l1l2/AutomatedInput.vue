@@ -17,7 +17,7 @@
   </li>
   <li v-show="allTxs.length" class="list-group-item">
     <p>Found {{ getMessageText() }} to l2 (click to open):</p>
-    <ul>
+    <ul class="scrollable">
       <li v-for="txHashUrl in allTxs" :key="txHashUrl">
         <a :href="getUrl() + txHashUrl" target="_blank">
           {{ txHashUrl }}
@@ -155,5 +155,10 @@ a {
 
 a:hover {
   font-size: clamp(13px, 1.11vw, 25px);
+}
+
+.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
 }
 </style>
