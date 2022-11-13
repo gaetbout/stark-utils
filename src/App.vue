@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import Router from '@/components/Router.vue';
+import Header from "@/components/Header.vue";
+import Router from "@/components/Router.vue";
 
 export default {
   components: {
     Header,
-    Router
+    Router,
   },
 };
 </script>
@@ -47,6 +47,10 @@ export default {
 
 h2 {
   margin-bottom: 0px !important;
+}
+
+.list-group-item {
+  overflow-x: hidden !important;
 }
 
 button {

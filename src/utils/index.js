@@ -16,7 +16,7 @@ function toSelector(val) {
     return { hexy: "", inty: "" };
   }
   const hexBN = new BN(removeHexPrefix(hash.getSelectorFromName(val)), 16);
-  return { inty: hexBN.toString(10), hexy: hash.getSelectorFromName(val), };
+  return { inty: hexBN.toString(10), hexy: hash.getSelectorFromName(val) };
 }
 
 function toBN(val) {
