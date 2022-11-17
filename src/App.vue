@@ -34,6 +34,15 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* Styling toggle */
+  --toggle-bg-off: var(--main-color);
+  --toggle-bg-on: var(--secondary-color);
+  --toggle-border-on: var(--secondary-color);
+  --toggle-border-off: var(--main-color);
+  --toggle-text-on: var(--font-white-color);
+  --toggle-text-off: var(--font-white-color);
+  --toggle-ring-color: var(--font-white-color);
+
 }
 
 #app {

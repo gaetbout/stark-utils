@@ -4,12 +4,8 @@
       <h2>Convertor &nbsp;&nbsp;<i class="fas fa-random"></i></h2>
     </div>
     <div class="card-body px-lg-5">
-      <input
-        v-model="input"
-        type="text"
-        class="form-control formy mt-2 mb-4 text-center shadow"
-        placeholder="input..."
-      />
+      <input v-model="input" type="text" class="form-control formy mt-2 mb-4 text-center shadow"
+        placeholder="input..." />
       <!-- TODO check every inFmt -->
       <!-- TODO check every isValid -->
       <ul class="list-group mb-4">
@@ -144,18 +140,6 @@ export default {
 </script>
 
 <style>
-.toggle {
-  color: var(--font-white-color);
-  background-color: var(--main-color);
-  border-color: var(--main-color);
-}
-
-.toggle-on {
-  color: var(--font-white-color);
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
-}
-
 .list-group-item {
   overflow-x: auto;
   overflow-y: hidden;

@@ -2,30 +2,15 @@
   <li class="list-group-item">
     {{ title }}
     <!-- TODO Emit toggle to update data and get rid of the 2 datas being passed! -->
-    <Toggle
-      v-model="selectorHex"
-      onLabel="hex"
-      offLabel="dec"
-      class="float-right"
-    />
+    <Toggle v-model="selectorHex" onLabel="hex" offLabel="dec" class="float-right" />
     <br />
     <div v-if="selectorHex">
-      <CopyComponent
-        :key="item"
-        v-for="item in dataBag.hexValues"
-        :valueToCopy="item"
-        :isValid="dataBag.valid"
-        :inFormat="dataBag.inFmt"
-      />
+      <CopyComponent :key="item" v-for="item in dataBag.hexValues" :valueToCopy="item" :isValid="dataBag.valid"
+        :inFormat="dataBag.inFmt" />
     </div>
     <div v-else>
-      <CopyComponent
-        :key="item"
-        v-for="item in dataBag.intValues"
-        :valueToCopy="item"
-        :isValid="dataBag.valid"
-        :inFormat="dataBag.inFmt"
-      />
+      <CopyComponent :key="item" v-for="item in dataBag.intValues" :valueToCopy="item" :isValid="dataBag.valid"
+        :inFormat="dataBag.inFmt" />
     </div>
   </li>
 </template>
@@ -63,4 +48,6 @@ export default {
 };
 </script>
 
-<style src="@vueform/toggle/themes/default.css"></style>
+<style src="@vueform/toggle/themes/default.css">
+
+</style>
