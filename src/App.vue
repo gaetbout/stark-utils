@@ -42,7 +42,6 @@ export default {
   --toggle-text-on: var(--font-white-color);
   --toggle-text-off: var(--font-white-color);
   --toggle-ring-color: var(--font-white-color);
-
 }
 
 #app {

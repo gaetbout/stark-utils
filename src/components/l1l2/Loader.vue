@@ -1,15 +1,13 @@
 <template>
   <div class="align-center">
-    <div class="loader-animation "></div>
+    <div class="loader-animation"></div>
   </div>
 </template>
-
-
 
 <script>
 export default {
   name: "Loader",
-}
+};
 </script>
 
 <style scoped>
@@ -54,7 +52,7 @@ export default {
 
 @keyframes h2 {
   100% {
-    transform: rotate(1turn)
+    transform: rotate(1turn);
   }
 }
 </style>
