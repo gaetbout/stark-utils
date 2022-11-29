@@ -1,2 +1,29 @@
-name: Lint Action
-uses: wearerequired/lint-action@v2.1.0
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  checks: write
+  contents: write
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Lint Action
+        uses: wearerequired/lint-action@v2.1.0
+
+        with:
+          eslint: true
+          prettier: true
