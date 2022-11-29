@@ -2,8 +2,13 @@
   <li class="list-group-item">
     Transaction hash:
     <!-- TODO change each input by a personal component with an x at the end to delete it? -->
-    <input v-model="txHash" type="text" v-on:input="fetchL2Logs" class="form-control formy my-3 mr-2 shadow"
-      placeholder="Paste here your L1 transaction hash..." />
+    <input
+      v-model="txHash"
+      type="text"
+      v-on:input="fetchL2Logs"
+      class="form-control formy my-3 mr-2 shadow"
+      placeholder="Paste here your L1 transaction hash..."
+    />
     <!-- Tx hash for 5 msgs to l2 (testnet)
       0x4f50619fb21608b9609345da8262d2387b09741ee64bc2b37e92cbb58e3c84c9
       tx hahs for 1 msg to l2 (testnet) 
@@ -12,7 +17,7 @@
     <h2 v-show="hashError">Incorrect tx hash</h2>
     <div v-show="showWrongNetworkMessage">
       <h2>You might be using the wrong network</h2>
-      <h3> Change your current metamask chain</h3>
+      <h3>Change your current metamask chain</h3>
     </div>
   </li>
   <li v-show="allTxs.length" class="list-group-item">
@@ -30,10 +35,9 @@
 
 <script>
 import { hash } from "starknet";
-import Loader from '@/components/l1l2/Loader.vue';
+import Loader from "@/components/l1l2/Loader.vue";
 import Web3 from "web3";
 import { constants } from "starknet";
-
 
 export default {
   name: "AutomatedInput",
@@ -41,7 +45,7 @@ export default {
     isMainnet: Boolean,
   },
   components: {
-    Loader
+    Loader,
   },
   data() {
     return {
@@ -54,7 +58,7 @@ export default {
   },
   methods: {
     hasTxs() {
-      return this.allTxs.size > 0
+      return this.allTxs.size > 0;
     },
     fetchL2Logs() {
       this.allTxs = [];
@@ -76,18 +80,22 @@ export default {
         }
         const log2Selector =
           "0x9592d37825c744e33fa80c469683bbd04d336241bb600b574758efd182abe26a"; // ConsumedMessageToL2 selector
-        let allLog2Logs = txReceipt.logs.filter(log => log.topics[0] == log2Selector);
+        let allLog2Logs = txReceipt.logs.filter(
+          (log) => log.topics[0] == log2Selector
+        );
         const chaindId = this.getChaindId();
-        allLog2Logs.forEach(currentLog => {
+        allLog2Logs.forEach((currentLog) => {
           const data = web3.eth.abi.decodeLog(
-            [{
-              type: "uint256[]",
-              name: "payload",
-            },
-            {
-              type: "uint256",
-              name: "nonce",
-            },],
+            [
+              {
+                type: "uint256[]",
+                name: "payload",
+              },
+              {
+                type: "uint256",
+                name: "nonce",
+              },
+            ],
             currentLog.data
           );
           const claculatedHash = hash.calculateTransactionHashCommon(
@@ -102,17 +110,23 @@ export default {
           );
           this.allTxs.push(claculatedHash);
           this.isLoading = false;
-        })
+        });
       });
     },
     getUrl() {
-      return this.isMainnet ? "https://starkscan.co/tx/" : "https://testnet.starkscan.co/tx/";
+      return this.isMainnet
+        ? "https://starkscan.co/tx/"
+        : "https://testnet.starkscan.co/tx/";
     },
     getChaindId() {
-      return this.isMainnet ? constants.StarknetChainId.MAINNET : constants.StarknetChainId.TESTNET;
+      return this.isMainnet
+        ? constants.StarknetChainId.MAINNET
+        : constants.StarknetChainId.TESTNET;
     },
     getMessageText() {
-      return this.allTxs.length == 1 ? "1 message" : (this.allTxs.length + " messages")
+      return this.allTxs.length == 1
+        ? "1 message"
+        : this.allTxs.length + " messages";
     },
   },
 };
@@ -133,7 +147,7 @@ button {
 }
 
 body:before {
-  content: '';
+  content: "";
   height: 100%;
   display: inline-block;
   vertical-align: middle;

@@ -1,21 +1,27 @@
 <template>
-
-  <button class="collapsible" @click="$emit('toggle')"> {{ title }}
-    <i v-if="isOpened" class="fa fa-arrow-circle-up float-right" aria-hidden="true"></i>
-    <i v-else class="fa fa-arrow-circle-down float-right" aria-hidden="true"></i>
+  <button class="collapsible" @click="$emit('toggle')">
+    {{ title }}
+    <i
+      v-if="isOpened"
+      class="fa fa-arrow-circle-up float-right"
+      aria-hidden="true"
+    ></i>
+    <i
+      v-else
+      class="fa fa-arrow-circle-down float-right"
+      aria-hidden="true"
+    ></i>
   </button>
-
 </template>
 
 <script>
-
 export default {
   name: "ExpandableSection",
   props: {
     isOpened: Boolean,
     title: String,
   },
-}
+};
 </script>
 
 <style scoped>
