@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "mocha"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@vueform/toggle": "^2.0.1",
