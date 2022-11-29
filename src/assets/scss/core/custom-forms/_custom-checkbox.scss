@@ -3,35 +3,35 @@
 //
 
 .custom-checkbox {
-    .custom-control-input ~ .custom-control-label {
-        cursor: pointer;
-        font-size: $font-size-sm;
+  .custom-control-input ~ .custom-control-label {
+    cursor: pointer;
+    font-size: $font-size-sm;
+  }
+
+  .custom-control-input {
+    &:checked {
+      ~ .custom-control-label {
+        &::before {
+          border-color: $custom-control-indicator-checked-border-color;
+        }
+        &::after {
+          background-image: $custom-checkbox-indicator-icon-checked;
+        }
+      }
     }
 
-    .custom-control-input {
-        &:checked {
-            ~ .custom-control-label {
-                &::before {
-                    border-color: $custom-control-indicator-checked-border-color;
-                }
-                &::after {
-                    background-image: $custom-checkbox-indicator-icon-checked;
-                }
-            }
+    &:disabled {
+      ~ .custom-control-label {
+        &::before {
+          border-color: $custom-control-indicator-disabled-bg;
         }
+      }
 
-        &:disabled {
-            ~ .custom-control-label {
-                &::before {
-                    border-color: $custom-control-indicator-disabled-bg;
-                }
-            }
-
-            &:checked {
-                &::before {
-                    border-color: $custom-control-indicator-checked-disabled-bg;
-                }
-            }
+      &:checked {
+        &::before {
+          border-color: $custom-control-indicator-checked-disabled-bg;
         }
+      }
     }
+  }
 }

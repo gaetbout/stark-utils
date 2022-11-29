@@ -27,3 +27,4 @@ yarn-error.log*
 package-lock.json
 dist/
 yarn.lock
+pnpm-lock.yaml
