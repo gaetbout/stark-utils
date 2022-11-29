@@ -1,2 +1,2 @@
-- name: Lint Action
-  uses: wearerequired/lint-action@v2.1.0
+name: Lint Action
+uses: wearerequired/lint-action@v2.1.0
