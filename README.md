@@ -24,7 +24,6 @@ It allows to:
 - Do "About" page with link to github
 - Adding a way to have dec array to string?
 - Save selector as local storage? ==> Is the store used or planned to be used? If not ==> Remove it
-- For L1L2 msg provide a tx hash and fetch all info directly?
 - Once Fees are reworked do: https://stark-fees.vercel.app/
 
 ## Dev Tools for StarkNet
