@@ -1,7 +1,9 @@
 <template>
   <div class="card bg-secondary shadow border-0">
     <div class="card-header text-center">
-      <h2>Signature &nbsp;&nbsp; <fa-icon icon="fa-solid fa-bezier-curve" /></h2>
+      <h2>
+        Signature &nbsp;&nbsp; <fa-icon icon="fa-solid fa-bezier-curve" />
+      </h2>
     </div>
     <div class="card-body px-lg-5">
       <div class="ec-util">
@@ -26,10 +28,18 @@
           <br />
           Pedersen Hash:
           <div class="d-flex container-fluid">
-            <input v-model="hash1" type="text" class="form-control formy my-3 mr-2 text-center shadow"
-              placeholder="input 1..." />
-            <input v-model="hash2" type="text" class="form-control formy my-3 ml-2 text-center shadow"
-              placeholder="input 2..." />
+            <input
+              v-model="hash1"
+              type="text"
+              class="form-control formy my-3 mr-2 text-center shadow"
+              placeholder="input 1..."
+            />
+            <input
+              v-model="hash2"
+              type="text"
+              class="form-control formy my-3 ml-2 text-center shadow"
+              placeholder="input 2..."
+            />
           </div>
           <br />
           Hash Out:
@@ -38,11 +48,23 @@
           <br />
           Signature:
           <div class="d-flex container-fluid" style="align-items: center">
-            <input v-model="hashData" type="text" class="form-control formy my-3 mr-2 text-center shadow"
-              placeholder="data" />
-            <input v-model="pk" type="text" class="form-control formy my-3 ml-2 text-center shadow"
-              placeholder="private key" />
-            <button class="ml-3 btn btn-sm btn-success" style="height: 2rem" @click="sig">
+            <input
+              v-model="hashData"
+              type="text"
+              class="form-control formy my-3 mr-2 text-center shadow"
+              placeholder="data"
+            />
+            <input
+              v-model="pk"
+              type="text"
+              class="form-control formy my-3 ml-2 text-center shadow"
+              placeholder="private key"
+            />
+            <button
+              class="ml-3 btn btn-sm btn-success"
+              style="height: 2rem"
+              @click="sig"
+            >
               <fa-icon icon="fa-solid fa-paper-plane" size="lg" />
             </button>
           </div>
@@ -65,16 +87,32 @@
           <br />
           Verify:
           <div class="d-flex container-fluid">
-            <input v-model="hashData" type="text" class="form-control formy my-3 mr-2 text-center shadow"
-              placeholder="data" />
-            <input v-model="pubX" type="text" class="form-control formy my-3 ml-2 text-center shadow"
-              placeholder="pub" />
+            <input
+              v-model="hashData"
+              type="text"
+              class="form-control formy my-3 mr-2 text-center shadow"
+              placeholder="data"
+            />
+            <input
+              v-model="pubX"
+              type="text"
+              class="form-control formy my-3 ml-2 text-center shadow"
+              placeholder="pub"
+            />
           </div>
           <div class="d-flex container-fluid">
-            <input v-model="sigR" type="text" class="form-control formy my-3 mr-2 text-center shadow"
-              placeholder="sigR" />
-            <input v-model="sigS" type="text" class="form-control formy my-3 ml-2 text-center shadow"
-              placeholder="sigS" />
+            <input
+              v-model="sigR"
+              type="text"
+              class="form-control formy my-3 mr-2 text-center shadow"
+              placeholder="sigR"
+            />
+            <input
+              v-model="sigS"
+              type="text"
+              class="form-control formy my-3 ml-2 text-center shadow"
+              placeholder="sigS"
+            />
           </div>
           <div class="text-center">
             <button v-if="!sigChecked" class="btn btn-info" @click="checkSig">
@@ -177,6 +215,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

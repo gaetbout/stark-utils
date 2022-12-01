@@ -3,7 +3,9 @@
     <div :class="getHeaderClass" class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-11 col-sm-12">
-          <router-link to="/"><img src="img/brand/favicon.png" alt="Logo" /></router-link>
+          <router-link to="/"
+            ><img src="img/brand/favicon.png" alt="Logo"
+          /></router-link>
           <router-link to="/converter">Converter</router-link>
           <router-link to="/l1l2">L1 &#8594; L2</router-link>
           <router-link to="/signature">Signature</router-link>
@@ -78,7 +80,6 @@ a.active {
 }
 
 @media screen and (max-width: 600px) {
-
   a,
   .topnav-right {
     float: none;

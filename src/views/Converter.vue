@@ -4,8 +4,12 @@
       <h2>Convertor &nbsp;&nbsp; <fa-icon icon="fa-solid fa-right-left" /></h2>
     </div>
     <div class="card-body px-lg-5">
-      <input v-model="input" type="text" class="form-control formy mt-2 mb-4 text-center shadow"
-        placeholder="input..." />
+      <input
+        v-model="input"
+        type="text"
+        class="form-control formy mt-2 mb-4 text-center shadow"
+        placeholder="input..."
+      />
       <!-- TODO check every inFmt -->
       <!-- TODO check every isValid -->
       <ul class="list-group mb-4">
