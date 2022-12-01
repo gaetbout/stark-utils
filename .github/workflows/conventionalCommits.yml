@@ -1,14 +1,20 @@
 name: Conventional Commits
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [master]
+    branches:
+      - main
 
 jobs:
   build:
     name: Conventional Commits
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out Git repository
+        uses: actions/checkout@v2
 
-      - uses: webiny/action-conventional-commits@v1.1.0
+      - name: Check if the commit name respects the convention
+        uses: webiny/action-conventional-commits@v1.1.0
