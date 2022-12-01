@@ -1,7 +1,10 @@
 <template>
   <div class="card bg-secondary shadow border-0">
     <div class="card-header text-center">
-      <h2>L1 &rarr; L2 <fa-icon icon="fa-solid fa-bridge-circle-check" /></h2>
+      <h2>
+        L1 &rarr; L2 &nbsp;&nbsp;
+        <fa-icon icon="fa-solid fa-bridge-circle-check" />
+      </h2>
     </div>
     <!-- This uses
     https://stackoverflow.com/questions/72239816/checking-result-of-an-l1-l2-message-invoke-in-starknet  
