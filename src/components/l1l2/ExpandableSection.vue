@@ -1,16 +1,8 @@
 <template>
   <button class="collapsible" @click="$emit('toggle')">
     {{ title }}
-    <i
-      v-if="isOpened"
-      class="fa fa-arrow-circle-up float-right"
-      aria-hidden="true"
-    ></i>
-    <i
-      v-else
-      class="fa fa-arrow-circle-down float-right"
-      aria-hidden="true"
-    ></i>
+    <fa-icon v-if="isOpened" class="float-right" icon="fa-solid fa-caret-up" />
+    <fa-icon v-else class="float-right" icon="fa-solid fa-caret-down" />
   </button>
 </template>
 

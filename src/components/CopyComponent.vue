@@ -1,13 +1,9 @@
 <template>
-  <div
-    v-if="valueToCopy && valueToCopy !== '0x'"
-    :class="[
-      isValid ? 'btn-outline-success' : 'btn-outline-danger',
-      'btn btn-sm ',
-    ]"
-    @click="copy(valueToCopy)"
-  >
-    <i v-if="inFormat" class="fas fa-check-circle text-success float-left"> </i>
+  <div v-if="valueToCopy && valueToCopy !== '0x'" :class="[
+    isValid ? 'btn-outline-success' : 'btn-outline-danger',
+    'btn btn-sm ',
+  ]" @click="copy(valueToCopy)">
+    <fa-icon v-if="inFormat" class="text-success float-left" icon="fa-solid fa-circle-check" />
     {{ valueToCopy }}
   </div>
   <br />
