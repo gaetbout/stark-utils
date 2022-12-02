@@ -10,12 +10,12 @@ on:
       - main
 
 jobs:
-  build:
-    name: Conventional Commits
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+    build:
+        name: Conventional Commits
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
 
-      - name: Check if the commit name respects the convention
-        uses: webiny/action-conventional-commits@v1.1.0
+            - name: Check if the commit name respects the convention
+              uses: webiny/action-conventional-commits@v1.1.0

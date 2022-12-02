@@ -5,7 +5,7 @@
 // Color variations
 
 @each $color, $value in $brand-colors {
-  .btn-#{$color} {
-    @include button-variant($value, $value);
-  }
+    .btn-#{$color} {
+        @include button-variant($value, $value);
+    }
 }
