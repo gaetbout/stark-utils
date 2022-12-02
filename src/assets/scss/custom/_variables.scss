@@ -28,18 +28,18 @@ $black: #000 !default;
 
 $grays: () !default;
 $grays: map-merge(
-  (
-    "100": $gray-100,
-    "200": $gray-200,
-    "300": $gray-300,
-    "400": $gray-400,
-    "500": $gray-500,
-    "600": $gray-600,
-    "700": $gray-700,
-    "800": $gray-800,
-    "900": $gray-900,
-  ),
-  $grays
+    (
+        '100': $gray-100,
+        '200': $gray-200,
+        '300': $gray-300,
+        '400': $gray-400,
+        '500': $gray-500,
+        '600': $gray-600,
+        '700': $gray-700,
+        '800': $gray-800,
+        '900': $gray-900,
+    ),
+    $grays
 );
 
 $blue: #5e72e4 !default;
@@ -60,24 +60,24 @@ $light-mode-nav-box-shadow: 0 0 5rem 0 rgba(136, 152, 170, 0.3) !important;
 
 $colors: () !default;
 $colors: map-merge(
-  (
-    "blue": $blue,
-    "indigo": $indigo,
-    "purple": $purple,
-    "pink": $pink,
-    "red": $red,
-    "orange": $orange,
-    "yellow": $yellow,
-    "green": $green,
-    "teal": $teal,
-    "cyan": $cyan,
-    "white": $white,
-    "gray": $gray-600,
-    "light": $gray-400,
-    "lighter": $gray-200,
-    "gray-dark": $gray-800,
-  ),
-  $colors
+    (
+        'blue': $blue,
+        'indigo': $indigo,
+        'purple': $purple,
+        'pink': $pink,
+        'red': $red,
+        'orange': $orange,
+        'yellow': $yellow,
+        'green': $green,
+        'teal': $teal,
+        'cyan': $cyan,
+        'white': $white,
+        'gray': $gray-600,
+        'light': $gray-400,
+        'lighter': $gray-200,
+        'gray-dark': $gray-800,
+    ),
+    $colors
 );
 
 $default: #172b4d !default;
@@ -103,108 +103,108 @@ $github: #222222 !default;
 
 $theme-colors: () !default;
 $theme-colors: map-merge(
-  (
-    "default": $default,
-    "primary": $primary,
-    "secondary": $secondary,
-    "success": $success,
-    "info": $info,
-    "warning": $warning,
-    "danger": $danger,
-    "white": $white,
-    "neutral": $white,
-    "dark": $dark,
-    "darker": $darker,
-  ),
-  $theme-colors
+    (
+        'default': $default,
+        'primary': $primary,
+        'secondary': $secondary,
+        'success': $success,
+        'info': $info,
+        'warning': $warning,
+        'danger': $danger,
+        'white': $white,
+        'neutral': $white,
+        'dark': $dark,
+        'darker': $darker,
+    ),
+    $theme-colors
 );
 
 $brand-colors: () !default;
 $brand-colors: map-merge(
-  (
-    "facebook": $facebook,
-    "twitter": $twitter,
-    "google-plus": $google-plus,
-    "instagram": $instagram,
-    "pinterest": $pinterest,
-    "youtube": $youtube,
-    "slack": $slack,
-    "dribbble": $dribbble,
-    "github": $github,
-  ),
-  $brand-colors
+    (
+        'facebook': $facebook,
+        'twitter': $twitter,
+        'google-plus': $google-plus,
+        'instagram': $instagram,
+        'pinterest': $pinterest,
+        'youtube': $youtube,
+        'slack': $slack,
+        'dribbble': $dribbble,
+        'github': $github,
+    ),
+    $brand-colors
 );
 
 $shape-colors: () !default;
 $shape-colors: map-merge(
-  (
-    "default": #32325d,
-    "primary": #5533ff,
-    "secondary": #24b47e,
-    "neutral": #e9ecef,
-    "blue-gray": #b2cbe1,
-  ),
-  $shape-colors
+    (
+        'default': #32325d,
+        'primary': #5533ff,
+        'secondary': #24b47e,
+        'neutral': #e9ecef,
+        'blue-gray': #b2cbe1,
+    ),
+    $shape-colors
 );
 
 $shapes-primary-colors: () !default;
 $shapes-primary-colors: map-merge(
-  (
-    "step-1-gradient-bg": #281483,
-    "step-2--bg": #8f6ed5,
-    "step-3-gradient-bg": #d782d9,
-    "span-1-bg": #53f,
-    "span-2-bg": #4553ff,
-    "span-3-bg": #4f40ff,
-    "span-4-bg": #25ddf5,
-    "span-5-bg": #1fa2ff,
-  ),
-  $shapes-primary-colors
+    (
+        'step-1-gradient-bg': #281483,
+        'step-2--bg': #8f6ed5,
+        'step-3-gradient-bg': #d782d9,
+        'span-1-bg': #53f,
+        'span-2-bg': #4553ff,
+        'span-3-bg': #4f40ff,
+        'span-4-bg': #25ddf5,
+        'span-5-bg': #1fa2ff,
+    ),
+    $shapes-primary-colors
 );
 
 $shapes-default-colors: () !default;
 $shapes-default-colors: map-merge(
-  (
-    "step-1-gradient-bg": #7795f8,
-    "step-2-gradient-bg": #6772e5,
-    "step-3-gradient-bg": #555abf,
-    "span-1-bg": #7795f8,
-    "span-2-bg": #7b9aff,
-    "span-3-bg": #6f8ff8,
-    "span-4-bg": #76eea7,
-    "span-5-bg": #6adaff,
-  ),
-  $shapes-default-colors
+    (
+        'step-1-gradient-bg': #7795f8,
+        'step-2-gradient-bg': #6772e5,
+        'step-3-gradient-bg': #555abf,
+        'span-1-bg': #7795f8,
+        'span-2-bg': #7b9aff,
+        'span-3-bg': #6f8ff8,
+        'span-4-bg': #76eea7,
+        'span-5-bg': #6adaff,
+    ),
+    $shapes-default-colors
 );
 
 $shapes-light-colors: () !default;
 $shapes-light-colors: map-merge(
-  (
-    "step-1-gradient-bg": #b2cbe1,
-    "step-2-gradient-bg": #f6f9fc,
-    "step-3-gradient-bg": #f6f9fc,
-    "span-1-bg": #b4cce1,
-    "span-2-bg": #c5dbef,
-    "span-3-bg": #b9d5ed,
-    "span-4-bg": #74e4a2,
-    "span-5-bg": #008169,
-  ),
-  $shapes-light-colors
+    (
+        'step-1-gradient-bg': #b2cbe1,
+        'step-2-gradient-bg': #f6f9fc,
+        'step-3-gradient-bg': #f6f9fc,
+        'span-1-bg': #b4cce1,
+        'span-2-bg': #c5dbef,
+        'span-3-bg': #b9d5ed,
+        'span-4-bg': #74e4a2,
+        'span-5-bg': #008169,
+    ),
+    $shapes-light-colors
 );
 
 $shapes-dark-colors: () !default;
 $shapes-dark-colors: map-merge(
-  (
-    "step-1-gradient-bg": #32325d,
-    "step-2-gradient-bg": #32325d,
-    "step-3-gradient-bg": #32325d,
-    "span-1-bg": #2e2e57,
-    "span-2-bg": #2b2b58,
-    "span-3-bg": #25254d,
-    "span-4-bg": #d782d9,
-    "span-5-bg": #008169,
-  ),
-  $shapes-dark-colors
+    (
+        'step-1-gradient-bg': #32325d,
+        'step-2-gradient-bg': #32325d,
+        'step-3-gradient-bg': #32325d,
+        'span-1-bg': #2e2e57,
+        'span-2-bg': #2b2b58,
+        'span-3-bg': #25254d,
+        'span-4-bg': #d782d9,
+        'span-5-bg': #008169,
+    ),
+    $shapes-dark-colors
 );
 
 // Translucent color variations
@@ -238,14 +238,14 @@ $body-color: $gray-700 !default;
 
 $section-colors: () !default;
 $section-colors: map-merge(
-  (
-    "primary": $body-bg,
-    "secondary": $secondary,
-    "light": $gray-400,
-    "dark": $dark,
-    "darker": $darker,
-  ),
-  $section-colors
+    (
+        'primary': $body-bg,
+        'secondary': $secondary,
+        'light': $gray-400,
+        'dark': $dark,
+        'darker': $darker,
+    ),
+    $section-colors
 );
 
 // Links
@@ -258,14 +258,14 @@ $link-hover-decoration: none !default;
 // Grid breakpoints
 
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
 );
 
-@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include _assert-starts-at-zero($grid-breakpoints);
 
 // Grid containers
@@ -277,41 +277,41 @@ $grid-breakpoints: (
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(
-  (
-    -9: - ($spacer * 10),
-    -8: - ($spacer * 8),
-    -7: - ($spacer * 6),
-    -6: - ($spacer * 4.5),
-    -5: - ($spacer * 3),
-    -4: - ($spacer * 1.5),
-    -3: -$spacer,
-    -2: - ($spacer * 0.5),
-    -1: - ($spacer * 0.25),
-    0: 0,
-    1: ($spacer * 0.25),
-    2: ($spacer * 0.5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3),
-    6: ($spacer * 4.5),
-    7: ($spacer * 6),
-    8: ($spacer * 8),
-    9: ($spacer * 10)
-  ),
-  $spacers
+    (
+        -9: - ($spacer * 10),
+        -8: - ($spacer * 8),
+        -7: - ($spacer * 6),
+        -6: - ($spacer * 4.5),
+        -5: - ($spacer * 3),
+        -4: - ($spacer * 1.5),
+        -3: -$spacer,
+        -2: - ($spacer * 0.5),
+        -1: - ($spacer * 0.25),
+        0: 0,
+        1: ($spacer * 0.25),
+        2: ($spacer * 0.5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 3),
+        6: ($spacer * 4.5),
+        7: ($spacer * 6),
+        8: ($spacer * 8),
+        9: ($spacer * 10)
+    ),
+    $spacers
 );
 
 // This variable affects the `.h-*` and `.w-*` classes.
 
 $sizes: () !default;
 $sizes: map-merge(
-  (
-    25: 25%,
-    50: 50%,
-    75: 75%,
-    100: 100%,
-  ),
-  $sizes
+    (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%,
+    ),
+    $sizes
 );
 
 // Components
@@ -333,8 +333,8 @@ $box-shadow: 0 0 2rem 0 rgba($gray-600, 0.15) !default;
 $box-shadow-lg: 0 0 3rem rgba($gray-600, 0.175) !default;
 
 $component-active-color: $white !default;
-$component-active-bg: theme-color("primary") !default;
-$component-active-border-color: theme-color("primary") !default;
+$component-active-bg: theme-color('primary') !default;
+$component-active-border-color: theme-color('primary') !default;
 
 $component-hover-color: $gray-300 !default;
 $component-hover-bg: $gray-300 !default;
@@ -348,7 +348,7 @@ $transition-collapse: height 0.35s ease !default;
 
 // Fonts
 
-$font-family-sans-serif: "Varela Round", sans-serif !default;
+$font-family-sans-serif: 'Varela Round', sans-serif !default;
 $font-family-base: $font-family-sans-serif !default;
 
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
@@ -463,14 +463,14 @@ $table-head-letter-spacing: 1px !default;
 
 $table-body-font-size: 0.8125rem !default;
 
-$table-dark-bg: theme-color("default") !default;
+$table-dark-bg: theme-color('default') !default;
 $table-dark-accent-bg: rgba($white, 0.05) !default;
 $table-dark-hover-bg: rgba($white, 0.075) !default;
-$table-dark-border-color: lighten(theme-color("default"), 7%) !default;
+$table-dark-border-color: lighten(theme-color('default'), 7%) !default;
 $table-dark-color: $body-bg !default;
 
-$table-dark-head-bg: lighten(theme-color("default"), 4%) !default;
-$table-dark-head-color: lighten(theme-color("default"), 35%) !default;
+$table-dark-head-bg: lighten(theme-color('default'), 4%) !default;
+$table-dark-head-color: lighten(theme-color('default'), 35%) !default;
 
 // Buttons + Forms
 
@@ -519,7 +519,7 @@ $btn-text-transform: none !default;
 $btn-letter-spacing: 0.025em !default;
 $btn-box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08) !default;
 $btn-hover-box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
-  0 3px 6px rgba(0, 0, 0, 0.08) !default;
+    0 3px 6px rgba(0, 0, 0, 0.08) !default;
 $btn-focus-box-shadow: $btn-hover-box-shadow !default;
 $btn-focus-width: $input-btn-focus-width !default;
 $btn-active-box-shadow: none !default;
@@ -616,8 +616,8 @@ $custom-control-indicator-checked-bg: $component-active-bg !default;
 $custom-control-indicator-checked-border-color: $component-active-border-color !default;
 $custom-control-indicator-checked-box-shadow: $custom-control-indicator-box-shadow !default;
 $custom-control-indicator-checked-disabled-bg: rgba(
-  theme-color("primary"),
-  0.5
+    theme-color('primary'),
+    0.5
 ) !default;
 
 $custom-control-indicator-disabled-bg: $gray-200 !default;
@@ -630,14 +630,14 @@ $custom-checkbox-indicator-border-radius: $border-radius-sm !default;
 
 $custom-toggle-width: 50px !default;
 $custom-toggle-slider-bg: $gray-200 !default;
-$custom-toggle-checked-bg: theme-color("primary") !default;
+$custom-toggle-checked-bg: theme-color('primary') !default;
 
 // Form validation
 
 $form-feedback-valid-bg: lighten($success, 15%) !default;
-$form-feedback-valid-color: theme-color("success") !default;
+$form-feedback-valid-color: theme-color('success') !default;
 $form-feedback-invalid-bg: lighten($warning, 15%) !default;
-$form-feedback-invalid-color: theme-color("warning") !default;
+$form-feedback-invalid-color: theme-color('warning') !default;
 
 // Allows for customizing button radius independently from global border radius
 
@@ -653,7 +653,7 @@ $chart-legend-margin-top: 2.5rem !default;
 $chart-legend-font-size: $font-size-sm !default;
 $chart-legend-color: $text-muted !default;
 $chart-legend-height: $chart-legend-margin-top + $chart-legend-font-size *
-  $line-height-base !default;
+    $line-height-base !default;
 
 // Map
 $map-height: 500px !default;
@@ -670,7 +670,7 @@ $noui-slider-connect-bg: $primary !default;
 $noui-slider-connect-disabled-bg: #b2b2b2 !default;
 
 $noui-handle-width: 15px !default;
-$noui-handle-bg: theme-color("primary") !default;
+$noui-handle-bg: theme-color('primary') !default;
 $noui-handle-border: 0 !default;
 $noui-handle-border-radius: 100% !default;
 
@@ -683,14 +683,14 @@ $dropdown-border-width: 0 !default;
 $dropdown-border-color: rgba($black, 0.15) !default;
 $dropdown-border-radius: $border-radius-lg !default;
 $dropdown-box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
-  0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1) !default;
+    0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1) !default;
 
 // Navs
 
 $nav-link-padding-y: 0.25rem !default;
 $nav-link-padding-x: 0.75rem !default;
 $nav-link-color: $gray-700 !default;
-$nav-link-hover-color: theme-color("primary") !default;
+$nav-link-hover-color: theme-color('primary') !default;
 $nav-link-disabled-color: $gray-600 !default;
 
 $nav-pills-padding-y: 0.75rem !default;
@@ -700,13 +700,13 @@ $nav-pills-space-x: 1rem !default;
 
 $nav-pills-bg: $white !default;
 $nav-pills-border-width: 1px !default;
-$nav-pills-border-color: theme-color("primary") !default;
+$nav-pills-border-color: theme-color('primary') !default;
 $nav-pills-border-radius: $border-radius !default;
 
-$nav-pills-link-color: theme-color("primary") !default;
-$nav-pills-link-hover-color: darken(theme-color("primary"), 5%) !default;
-$nav-pills-link-active-color: color-yiq(theme-color("primary")) !default;
-$nav-pills-link-active-bg: theme-color("primary") !default;
+$nav-pills-link-color: theme-color('primary') !default;
+$nav-pills-link-hover-color: darken(theme-color('primary'), 5%) !default;
+$nav-pills-link-active-color: color-yiq(theme-color('primary')) !default;
+$nav-pills-link-active-bg: theme-color('primary') !default;
 $nav-pills-box-shadow: $btn-box-shadow !default;
 
 // Navbar
@@ -900,7 +900,7 @@ $card-border-width: $border-width !default;
 $card-border-radius: $border-radius !default;
 $card-border-color: rgba($black, 0.05) !default;
 $card-inner-border-radius: calc(
-  #{$card-border-radius} - #{$card-border-width}
+    #{$card-border-radius} - #{$card-border-width}
 ) !default;
 // $card-cap-bg:                       $white !default;
 // $card-bg:                           $white !default;
@@ -933,9 +933,9 @@ $modal-content-border-color: rgba($black, 0.2) !default;
 $modal-content-border-width: 0 !default;
 $modal-content-border-radius: $border-radius-lg !default;
 $modal-content-box-shadow-xs: 0 15px 35px rgba(50, 50, 93, 0.2),
-  0 5px 15px rgba(0, 0, 0, 0.17);
+    0 5px 15px rgba(0, 0, 0, 0.17);
 $modal-content-box-shadow-sm-up: 0 15px 35px rgba(50, 50, 93, 0.2),
-  0 5px 15px rgba(0, 0, 0, 0.17);
+    0 5px 15px rgba(0, 0, 0, 0.17);
 
 $modal-backdrop-bg: $black !default;
 $modal-backdrop-opacity: 0.16 !default;
@@ -962,13 +962,13 @@ $datepicker-disabled-old-new-color: $gray-500 !default;
 $datepicker-header-cell-border-radius: $border-radius !default;
 
 $datepicker-active-color: $white !default;
-$datepicker-active-background: theme-color("primary") !default;
+$datepicker-active-background: theme-color('primary') !default;
 $datepicker-active-box-shadow: none !default;
 
-$datepicker-range-background: theme-color("primary") !default;
+$datepicker-range-background: theme-color('primary') !default;
 $datepicker-range-cell-focused-background: darken(
-  $datepicker-range-background,
-  5%
+    $datepicker-range-background,
+    5%
 );
 $datepicker-range-color: $white !default;
 $datepicker-range-highlighted-bg: $gray-200 !default;
@@ -983,7 +983,7 @@ $footer-padding-y: 1.5rem;
 $footer-padding-x: 0;
 
 $footer-link-font-size: 0.85rem !default;
-$footer-bg: theme-color("secondary") !default;
+$footer-bg: theme-color('secondary') !default;
 $footer-color: $gray-600 !default;
 $footer-link-color: $gray-600 !default;
 $footer-link-hover-color: $gray-700 !default;
@@ -992,4 +992,4 @@ $footer-heading-font-size: $font-size-sm !default;
 
 // Import Bootstrap variable defaults
 
-@import "~bootstrap/scss/variables";
+@import '~bootstrap/scss/variables';

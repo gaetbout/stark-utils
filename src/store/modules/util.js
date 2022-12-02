@@ -3,25 +3,25 @@
 // const getSelectorFromName = stark.getSelectorFromName;
 
 const state = {
-  utilPane: 1,
-};
+    utilPane: 1,
+}
 
 const getters = {
-  utilPane: (state) => state.utilPane,
-};
+    utilPane: (state) => state.utilPane,
+}
 
-const actions = {};
+const actions = {}
 
 const mutations = {
-  setUtilPane(state, pane) {
-    state.utilPane = pane;
-  },
-};
+    setUtilPane(state, pane) {
+        state.utilPane = pane
+    },
+}
 
 export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations,
-};
+    namespaced: true,
+    state,
+    getters,
+    actions,
+    mutations,
+}
