@@ -17,14 +17,26 @@
         <div class="title">
           <h2>This only works with ethereum Mainnet and Goerli</h2>
         </div>
-        <ExpandableSection @toggle="toggleSections" :isOpened="firstSectionOpened"
-          title="Automated input (easy mode)" />
-        <div class="collapsedSection" :class="{ fullSize1: firstSectionOpened }">
+        <ExpandableSection
+          @toggle="toggleSections"
+          :isOpened="firstSectionOpened"
+          title="Automated input (easy mode)"
+        />
+        <div
+          class="collapsedSection"
+          :class="{ fullSize1: firstSectionOpened }"
+        >
           <AutomatedInput :isMainnet="isMainnet()" />
         </div>
-        <ExpandableSection @toggle="toggleSections" :isOpened="!firstSectionOpened"
-          title="Manual input (advanced mode)" />
-        <div class="collapsedSection" :class="{ fullSize2: !firstSectionOpened }">
+        <ExpandableSection
+          @toggle="toggleSections"
+          :isOpened="!firstSectionOpened"
+          title="Manual input (advanced mode)"
+        />
+        <div
+          class="collapsedSection"
+          :class="{ fullSize2: !firstSectionOpened }"
+        >
           <ManualInput :isMainnet="isMainnet()" />
         </div>
       </div>
