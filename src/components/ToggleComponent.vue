@@ -1,7 +1,6 @@
 <template>
     <li class="list-group-item">
         {{ title }}
-        <!-- TODO Emit toggle to update data and get rid of the 2 datas being passed! -->
         <Toggle
             v-model="selectorHex"
             onLabel="hex"

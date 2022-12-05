@@ -22,7 +22,7 @@
         </div>
     </header>
 </template>
-// TODO lower assets folder size 3.5 mo du -h --max-depth=2 .
+
 <script>
 export default {
     name: 'Header',
