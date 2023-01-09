@@ -15,6 +15,7 @@
         "@vueform/toggle": "^2.0.1",
         "bn.js": "^5.2.0",
         "bootstrap": "4.6.0",
+        "core-js": "^3.27.1",
         "starknet": "^4.9.0",
         "vue": "^3.2.36",
         "vue-router": "4.0.1",
