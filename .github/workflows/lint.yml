@@ -1,13 +1,13 @@
 name: Lint
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
+    push:
+        branches:
+            - main
+            - develop
+    pull_request:
+        branches:
+            - main
 
 jobs:
     run-linters:
