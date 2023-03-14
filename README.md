@@ -25,25 +25,31 @@ It allows to:
 -   Adding a way to have dec array to string?
 -   Save selector as local storage? ==> Is the store used or planned to be used? If not ==> Remove it
 -   Once Fees are reworked do: https://stark-fees.vercel.app/
+-   Do a page using: getStorageAt: https://www.starknetjs.com/docs/API/provider#methods
+-   Do a page using: getTransactionReceipt: https://www.starknetjs.com/docs/API/provider#methods
 
 ## Dev Tools for StarkNet
 
 **_install dependencies_**
 
 ```bash
-yarn install
+npm run install
 ```
 
 **_serve local_**
 
 ```bash
-yarn serve
+npm run serve
 ```
 
 **_build_**
 
 ```bash
-yarn build
+npm run build
 ```
 
-For linux user replace `yarn` by `npm run`
+**__lint__**
+
+```bash
+npm run lint
+```

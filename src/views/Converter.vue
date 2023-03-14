@@ -12,8 +12,6 @@
                 class="form-control formy mt-2 mb-4 text-center shadow"
                 placeholder="input..."
             />
-            <!-- TODO check every inFmt -->
-            <!-- TODO check every isValid -->
             <ul class="list-group mb-4">
                 <SimpleCopyComponent :dataBag="outBNComp" title="felt:" />
                 <SimpleCopyComponent :dataBag="outHexComp" title="hex:" />
@@ -94,12 +92,13 @@ export default {
         },
         outSelectorComp() {
             const val = utils.toSelector(this.input)
+            console.log(val)
             const inFmt = !utils.isDecimal(this.input) && !this.isHexInput()
-            const test = new BN(utils.toBN(val.inty))
+            const test = new BN(utils.toBN(val))
             const valid = this.isLessThanMaxVal(test)
             return {
-                intValues: [val.inty.toString()],
-                hexValues: [val.hexy.toString()],
+                intValues: [val],
+                hexValues: [utils.addHexPrefix(val.toString(16))],
                 valid,
                 inFmt,
             }
@@ -143,10 +142,7 @@ export default {
             return input.lte(this.MAX_VAL_D2)
         },
         isHexInput() {
-            return (
-                this.input.startsWith('0x') &&
-                utils.isHex(utils.removeHexPrefix(this.input))
-            )
+            return utils.startWith0xAndIsHex(this.input)
         },
     },
 }

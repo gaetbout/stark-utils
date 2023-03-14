@@ -1,7 +1,6 @@
 import BN from 'bn.js'
 import { hash } from 'starknet'
 
-// TODO possible to update here using latest starknetjs func
 function asciiToHex(str) {
     let arr1 = ['0x']
     for (var n = 0; n < str.length; n++) {
@@ -13,34 +12,32 @@ function asciiToHex(str) {
 
 function toSelector(val) {
     if (!val) {
-        return { hexy: '', inty: '' }
+        return ''
     }
-    const hexBN = new BN(removeHexPrefix(hash.getSelectorFromName(val)), 16)
-    return { inty: hexBN.toString(10), hexy: hash.getSelectorFromName(val) }
+    return toBN(hash.getSelectorFromName(val))
 }
 
 function toBN(val) {
-    if (BN.isBN(val)) {
-        return val
-    }
     if (!val) {
         return ''
     }
-    if (val.startsWith('0x') && isHex(removeHexPrefix(val))) {
+    if (BN.isBN(val)) {
+        return val
+    }
+    if (startWith0xAndIsHex(val)) {
         return new BN(removeHexPrefix(val), 16)
     }
     if (isDecimal(val)) {
         return new BN(val, 10)
     }
-    const ascHex = asciiToHex(val)
-    return new BN(removeHexPrefix(ascHex), 16)
+    return new BN(removeHexPrefix(asciiToHex(val)), 16)
 }
 
 function toHex(val) {
     if (!val) {
         return ''
     }
-    if (val.startsWith('0x') && isHex(removeHexPrefix(val))) {
+    if (startWith0xAndIsHex(val)) {
         return val
     }
     if (isDecimal(val)) {
@@ -93,9 +90,14 @@ function addHexPrefix(hex) {
     return `0x${removeHexPrefix(hex)}`
 }
 
+function startWith0xAndIsHex(val) {
+    return val.startsWith('0x') && isHex(val)
+}
+
 function isHex(val) {
+    const cleanedInput = removeHexPrefix(val)
     const regexp = /^[0-9a-fA-F]+$/
-    return regexp.test(val)
+    return regexp.test(cleanedInput)
 }
 
 function isDecimal(val) {
@@ -112,5 +114,5 @@ export default {
     isDecimal,
     toHex,
     toSelector,
-    isHex,
+    startWith0xAndIsHex,
 }
