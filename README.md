@@ -33,19 +33,23 @@ It allows to:
 **_install dependencies_**
 
 ```bash
-yarn install
+npm run install
 ```
 
 **_serve local_**
 
 ```bash
-yarn serve
+npm run serve
 ```
 
 **_build_**
 
 ```bash
-yarn build
+npm run build
 ```
 
-For linux user replace `yarn` by `npm run`
+**__lint__**
+
+```bash
+npm run lint
+```

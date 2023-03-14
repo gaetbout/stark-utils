@@ -33,6 +33,13 @@
                             :inFormat="false"
                         />
                     </li>
+                    <li class="list-group-item">
+                        Public Y:
+                        <CopyComponent
+                            :valueToCopy="publicKeyY"
+                            :inFormat="false"
+                        />
+                    </li>
                 </ul>
                 <div>
                     <br />
@@ -86,21 +93,19 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             r:
-                            <div
+                            <CopyComponent
                                 v-if="sigR"
-                                class="btn btn-sm btn-outline-success"
-                            >
-                                {{ sigR }}
-                            </div>
+                                :valueToCopy="sigR"
+                                :inFormat="false"
+                            />
                         </li>
                         <li class="list-group-item">
                             s:
-                            <div
-                                v-if="sigS"
-                                class="btn btn-sm btn-outline-success"
-                            >
-                                {{ sigS }}
-                            </div>
+                            <CopyComponent
+                                v-if="sigR"
+                                :valueToCopy="sigR"
+                                :inFormat="false"
+                            />
                         </li>
                     </ul>
                     <br />
