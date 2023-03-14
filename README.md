@@ -48,7 +48,7 @@ npm run serve
 npm run build
 ```
 
-****lint****
+\***\*lint\*\***
 
 ```bash
 npm run lint
