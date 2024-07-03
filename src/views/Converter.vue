@@ -9,7 +9,7 @@
             <input
                 v-model="input"
                 type="text"
-                class="form-control formy mt-2 mb-4 text-center shadow"
+                class="form-control form mt-2 mb-4 text-center shadow"
                 placeholder="input..."
             />
             <ul class="list-group mb-4">

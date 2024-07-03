@@ -25,5 +25,4 @@ yarn-error.log*
 ./**.tar.gz
 
 dist/
-yarn.lock
 pnpm-lock.yaml
