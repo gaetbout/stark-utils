@@ -53,9 +53,7 @@ export default {
                 .map((e) => e.trim())
                 .filter((e) => e.length > 0)
                 .map(utils.toHex)
-            console.log(data)
-            const out = hash.computePedersenHashOnElements(data)
-            return out
+            return hash.computePedersenHashOnElements(data)
         },
         poseidonOut() {
             if (!this.poseidonData) return ''
@@ -64,9 +62,7 @@ export default {
                 .map((e) => e.trim())
                 .filter((e) => e.length > 0)
                 .map(utils.toHex)
-            console.log(data)
-            const out = hash.computePoseidonHashOnElements(data)
-            return out
+            return hash.computePoseidonHashOnElements(data)
         },
     },
     methods: {
