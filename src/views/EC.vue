@@ -33,13 +33,6 @@
                             :inFormat="false"
                         />
                     </li>
-                    <li class="list-group-item">
-                        Public Y:
-                        <CopyComponent
-                            :valueToCopy="publicKeyY"
-                            :inFormat="false"
-                        />
-                    </li>
                 </ul>
                 <div>
                     <br />
@@ -63,6 +56,7 @@
                     <CopyComponent :valueToCopy="hashOut" :inFormat="false" />
                     <br />
                     <br />
+                    <!-- TODO Delete a lot of stuff from here -->
                     Signature:
                     <div
                         class="d-flex container-fluid"
@@ -102,8 +96,8 @@
                         <li class="list-group-item">
                             s:
                             <CopyComponent
-                                v-if="sigR"
-                                :valueToCopy="sigR"
+                                v-if="sigS"
+                                :valueToCopy="sigS"
                                 :inFormat="false"
                             />
                         </li>
@@ -139,7 +133,7 @@
                         />
                     </div>
                     <div class="text-center">
-                        <button
+                        <!-- <button
                             v-if="!sigChecked"
                             class="btn btn-info"
                             @click="checkSig"
@@ -161,7 +155,7 @@
                             >
                                 sig invalid
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -170,7 +164,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { hash, ec } from 'starknet'
+import { ec } from 'starknet'
 import utils from '@/utils'
 import CopyComponent from '@/components/CopyComponent'
 
@@ -193,11 +187,11 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('stark', ['privateKey', 'publicKeyX', 'publicKeyY']),
+        ...mapGetters('stark', ['privateKey', 'publicKeyX']),
         hashOut() {
             const h1 = utils.toHex(this.hash1)
             const h2 = utils.toHex(this.hash2)
-            const out = hash.pedersen([h1, h2])
+            const out = ec.starkCurve.pedersen(h1, h2)
             return out
         },
     },
@@ -208,11 +202,13 @@ export default {
         sig() {
             if (!this.privateKey) return
             if (!this.hashData) return
-            const keyPair = ec.getKeyPair(this.privateKey)
-            const sig = ec.sign(keyPair, this.hashData)
-            if (sig.length == 2) {
-                this.sigR = sig[0].toString()
-                this.sigS = sig[1].toString()
+            const keyPair = ec.starkCurve.getStarkKey(this.privateKey)
+            const { r, s } = ec.starkCurve.sign(keyPair, this.hashData)
+            if (r) {
+                this.sigR = `0x${r.toString(16)}`
+            }
+            if (s) {
+                this.sigS = `0x${s.toString(16)}`
             }
         },
         async checkSig() {
