@@ -7,8 +7,7 @@
                         ><img src="img/brand/favicon.png" alt="Logo"
                     /></router-link>
                     <router-link to="/converter">Converter</router-link>
-                    <router-link to="/l1l2">L1 &#8594; L2</router-link>
-                    <router-link to="/signature">Signature</router-link>
+                    <router-link to="/hash">Hash</router-link>
                     <div class="topnav-right">
                         <a
                             href="https://github.com/gaetbout/stark-utils"

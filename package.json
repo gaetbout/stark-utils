@@ -5,7 +5,8 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "format": "yarn prettier --write ."
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -16,7 +17,7 @@
         "bn.js": "^5.2.0",
         "bootstrap": "4.6.0",
         "core-js": "^3.27.1",
-        "starknet": "^4.9.0",
+        "starknet": "^6.10.2",
         "vue": "^3.2.36",
         "vue-router": "4.0.1",
         "vuex": "^4.0.2",

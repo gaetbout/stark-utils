@@ -1,4 +1,4 @@
-import { ec, defaultProvider, Provider, stark } from 'starknet'
+import { ec, defaultProvider, Provider, stark, encode } from 'starknet'
 import utils from '@/utils'
 
 const state = {
@@ -68,18 +68,12 @@ const actions = {
         }
     },
     getStarkKey({ commit }) {
-        const pair = ec.genKeyPair()
-        const privatekey = utils.addHexPrefix(pair.getPrivate('hex'))
+        const privatekey = `0x${encode.buf2hex(
+            ec.starkCurve.utils.randomPrivateKey()
+        )}`
 
         commit('setPrivateKey', privatekey)
-        commit(
-            'setPubX',
-            utils.addHexPrefix(pair.getPublic().getX().toString(16))
-        )
-        commit(
-            'setPubY',
-            utils.addHexPrefix(pair.getPublic().getY().toString(16))
-        )
+        commit('setPubX', ec.starkCurve.getStarkKey(privatekey))
     },
 }
 

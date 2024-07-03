@@ -7,8 +7,6 @@ Stark-utils is a simple web application that aims at being a toolbox for Cairo d
 It allows to:
 
 -   Converter: Convert any input to a felt, a string, the hexadecimal value, ...
--   L1->L2: Allows to compute the hash of a TX sent to L2
--   Signature: TBD
 
 ## History (page removed)
 
@@ -16,6 +14,8 @@ It allows to:
      Reason: Better using a block explorer
 -   Call function: Allows to call a specific contract at specific etry point with sepcific inputs  
      Reason: Better using a block explorer
+-   L1->L2: Allows to compute the hash of a TX sent to L2 Outdated
+-   Signature: Unusable
 
 ## TODO list
 
