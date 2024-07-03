@@ -8,19 +8,10 @@
             class="float-right"
         />
         <br />
-        <div v-if="selectorHex">
+        <div>
             <CopyComponent
                 :key="item"
-                v-for="item in dataBag.hexValues"
-                :valueToCopy="item"
-                :isValid="dataBag.valid"
-                :inFormat="dataBag.inFmt"
-            />
-        </div>
-        <div v-else>
-            <CopyComponent
-                :key="item"
-                v-for="item in dataBag.intValues"
+                v-for="item in itemsToRender"
                 :valueToCopy="item"
                 :isValid="dataBag.valid"
                 :inFormat="dataBag.inFmt"
@@ -39,6 +30,13 @@ export default {
         CopyComponent,
         Toggle,
     },
+    computed: {
+        itemsToRender() {
+            return this.selectorHex
+                ? this.dataBag.hexValues
+                : this.dataBag.intValues
+        },
+    },
     props: {
         dataBag: {
             intValues: [String],
@@ -56,7 +54,7 @@ export default {
     },
     data() {
         return {
-            selectorHex: false,
+            selectorHex: true,
         }
     },
 }
