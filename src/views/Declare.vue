@@ -17,9 +17,14 @@
             <br />
             <br />
             <div v-if="error" class="alert alert-danger" role="alert">
-                Invalid files: {{ error }}
+                Invalid files:<br />
+                {{ error }}
             </div>
-            <div v-if="files" class="alert alert-info" role="alert">
+            <div
+                v-if="files && files.length == 2"
+                class="alert alert-info"
+                role="alert"
+            >
                 {{ files[0] }}
                 <br />
                 {{ files[1] }}
@@ -31,7 +36,7 @@
             />
             <br />
             <button
-                :disabled="error || !files || files.length != 2 || !network"
+                :disabled="error || !network"
                 class="btn col-12"
                 @click="connectWallet"
             >
@@ -65,6 +70,7 @@ export default {
             }
         },
         async previewFiles(e) {
+            this.files = []
             if (e.target.files.length == 0) {
                 return
             }
@@ -72,9 +78,22 @@ export default {
                 this.error = 'Require exactly 2 files'
                 return
             }
-            const files =  [e.target.files[0].name, e.target.files[1].name];
-            if (!files.some((f) => f.endsWith('.compiled_contract_class.json'))) {
-                this.error = "Missing '.compiled_contract_class.json' file" 
+            const files = [e.target.files[0].name, e.target.files[1].name]
+            if (
+                !files.some((f) => f.endsWith('.compiled_contract_class.json'))
+            ) {
+                this.error = "Missing '*.compiled_contract_class.json' file"
+                return
+            }
+            if (!files.some((f) => f.endsWith('.contract_class.json'))) {
+                this.error = "Missing '*.contract_class.json' file"
+                return
+            }
+            const a = files[0].split('.')[0]
+            const b = files[1].split('.')[0]
+            // TODO Improve here
+            if (a != b) {
+                this.error = 'Files do not match'
                 return
             }
             // argent_MockFutureArgentMultisig.compiled_contract_class.json
