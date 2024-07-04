@@ -7,10 +7,36 @@
             </h2>
         </div>
         <div class="card-body px-lg-5">
-            <!-- <MultifileElement name="files" /> -->
-            <Multiselect v-model="network" :options="['Mainnet', 'Sepolia']" />
             <br />
-            <button class="btn col-12" @click="connectWallet">Connect</button>
+            <input
+                type="file"
+                @change="previewFiles"
+                multiple=""
+                accept=".json"
+            />
+            <br />
+            <br />
+            <div v-if="error" class="alert alert-danger" role="alert">
+                Invalid files: {{ error }}
+            </div>
+            <div v-if="files" class="alert alert-info" role="alert">
+                {{ files[0] }}
+                <br />
+                {{ files[1] }}
+            </div>
+            <Multiselect
+                :canClear="false"
+                v-model="network"
+                :options="['Mainnet', 'Sepolia']"
+            />
+            <br />
+            <button
+                :disabled="error || !files || files.length != 2 || !network"
+                class="btn col-12"
+                @click="connectWallet"
+            >
+                Connect
+            </button>
         </div>
         <!-- You can deploy at https://voyager.online/class/0x06dcdd56f064b6c04ef13dbdaa55b896e9d651cbb1d25e6aae20ea3dfa2140e5#deploy -->
     </div>
@@ -26,19 +52,39 @@ export default {
     },
     methods: {
         async connectWallet() {
-            const { wallet } = await connect()
-            console.log('wallet.selectedAddress')
-            console.log(wallet)
-            if (wallet && wallet.isConnected) {
-                // setConnection(wallet)
-                // setProvider(wallet.account)
-                // setAddress(wallet.selectedAddress)
+            try {
+                const { wallet } = await connect()
+                console.log('wallet.selectedAddress')
+                console.log(wallet)
+                if (wallet && wallet.isConnected) {
+                    // setConnection(wallet)
+                    // setProvider(wallet.account)
+                    // setAddress(wallet.selectedAddress)
+                }
+            } catch (e) {
+                // console.error(e)
             }
+        },
+        async previewFiles(e) {
+            this.connectEnabled = false
+            if (e.target.files.length == 0) {
+                return
+            }
+            if (e.target.files.length != 2) {
+                this.error = 'Require exactly 2 files'
+                return
+            }
+            this.error = ''
+            const files = e.target.files
+            this.files = [files[0].name, files[1].name]
+            this.connectEnabled = true
         },
     },
     data() {
         return {
             network: 'Mainnet',
+            error: '',
+            files: '',
         }
     },
 }
