@@ -1,6 +1,7 @@
 import Home from '@/views/Home.vue'
 import Converter from '@/views/Converter.vue'
 import Hash from '@/views/Hash.vue'
+import Declare from '@/views/Declare.vue'
 import NotFound from '@/views/notFound.vue'
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
         path: '/hash',
         name: 'Hash',
         component: Hash,
+    },
+    {
+        path: '/declare',
+        name: 'Declare',
+        component: Declare,
     },
     {
         path: '/:pathMatch(.*)*',
