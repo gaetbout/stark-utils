@@ -1,9 +1,7 @@
 <template>
     <div class="card bg-secondary shadow border-0">
         <div class="card-header text-center">
-            <h2>
-                Hash &nbsp;&nbsp; <fa-icon icon="fa-solid fa-bezier-curve" />
-            </h2>
+            <h2>Hash &nbsp;&nbsp; <fa-icon icon="fa-solid fa-hashtag" /></h2>
         </div>
         <div class="card-body px-lg-5">
             Pedersen Hash:
