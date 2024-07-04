@@ -42,7 +42,6 @@
     </div>
 </template>
 <script>
-// import CopyComponent from '@/components/CopyComponent'
 import { connect } from 'starknetkit'
 import Multiselect from '@vueform/multiselect'
 
@@ -66,7 +65,6 @@ export default {
             }
         },
         async previewFiles(e) {
-            this.connectEnabled = false
             if (e.target.files.length == 0) {
                 return
             }
@@ -74,10 +72,15 @@ export default {
                 this.error = 'Require exactly 2 files'
                 return
             }
+            const files =  [e.target.files[0].name, e.target.files[1].name];
+            if (!files.some((f) => f.endsWith('.compiled_contract_class.json'))) {
+                this.error = "Missing '.compiled_contract_class.json' file" 
+                return
+            }
+            // argent_MockFutureArgentMultisig.compiled_contract_class.json
+            // argent_MockFutureArgentMultisig.contract_class.json
             this.error = ''
-            const files = e.target.files
-            this.files = [files[0].name, files[1].name]
-            this.connectEnabled = true
+            this.files = files
         },
     },
     data() {
