@@ -42,6 +42,11 @@ export default {
     --toggle-text-on: var(--font-white-color);
     --toggle-text-off: var(--font-white-color);
     --toggle-ring-color: var(--font-white-color);
+    /* Styling multiselect on Declare */
+    --ms-option-bg-selected: var(--secondary-color);
+    --ms-option-bg-selected-pointed: var(--main-color);
+    --ms-border-color-active: var(--secondary-color);
+    --ms-ring-color: rgba(var(--secondary-color));
 }
 
 #app {
