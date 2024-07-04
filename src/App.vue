@@ -44,7 +44,10 @@ export default {
     --toggle-ring-color: var(--font-white-color);
     /* Styling multiselect on Declare */
     --ms-option-bg-selected: var(--secondary-color);
+    --ms-option-bg-selected-hover: var(--main-color);
     --ms-option-bg-selected-pointed: var(--main-color);
+    --ms-option-bg-pointed: var(--main-color);
+    --ms-option-color-pointed: var(--font-white-color);
     --ms-border-color-active: var(--secondary-color);
     --ms-ring-color: rgba(var(--secondary-color));
 }

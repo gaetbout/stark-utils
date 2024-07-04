@@ -6,10 +6,12 @@
                 <fa-icon icon="fa-solid fa-file-contract" />
             </h2>
         </div>
-        <div class="card-body px-lg-5"></div>
-        <!-- <MultifileElement name="files" /> -->
-        <Multiselect v-model="network" :options="['Mainnet', 'Sepolia']" />
-        <button class="btn" @click="connectWallet">Connect</button>
+        <div class="card-body px-lg-5">
+            <!-- <MultifileElement name="files" /> -->
+            <Multiselect v-model="network" :options="['Mainnet', 'Sepolia']" />
+            <br />
+            <button class="btn col-12" @click="connectWallet">Connect</button>
+        </div>
         <!-- You can deploy at https://voyager.online/class/0x06dcdd56f064b6c04ef13dbdaa55b896e9d651cbb1d25e6aae20ea3dfa2140e5#deploy -->
     </div>
 </template>
