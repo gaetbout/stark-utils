@@ -25,9 +25,9 @@
                 class="alert alert-info"
                 role="alert"
             >
-                {{ files[0] }}
+                {{ files[0].name }}
                 <br />
-                {{ files[1] }}
+                {{ files[1].name }}
             </div>
             <Multiselect
                 :canClear="false"
@@ -79,27 +79,31 @@ export default {
                 return
             }
             const files = [e.target.files[0].name, e.target.files[1].name]
-            if (
-                !files.some((f) => f.endsWith('.compiled_contract_class.json'))
-            ) {
+            const compiledContractClass = files.find((f) =>
+                f.endsWith('.compiled_contract_class.json')
+            )
+            if (!compiledContractClass) {
                 this.error = "Missing '*.compiled_contract_class.json' file"
                 return
             }
-            if (!files.some((f) => f.endsWith('.contract_class.json'))) {
+
+            const contractClass = files.find((f) =>
+                f.endsWith('.contract_class.json')
+            )
+            if (!contractClass) {
                 this.error = "Missing '*.contract_class.json' file"
                 return
             }
-            const a = files[0].split('.')[0]
-            const b = files[1].split('.')[0]
-            // TODO Improve here
-            if (a != b) {
+
+            if (
+                compiledContractClass.split('.')[0] !=
+                contractClass.split('.')[0]
+            ) {
                 this.error = 'Files do not match'
                 return
             }
-            // argent_MockFutureArgentMultisig.compiled_contract_class.json
-            // argent_MockFutureArgentMultisig.contract_class.json
             this.error = ''
-            this.files = files
+            this.files = e.target.files
         },
     },
     data() {
