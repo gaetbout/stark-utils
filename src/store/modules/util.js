@@ -1,7 +1,3 @@
-// import { getStarknet } from "@argent/get-starknet";
-// import { stark } from "starknet";
-// const getSelectorFromName = stark.getSelectorFromName;
-
 const state = {
     utilPane: 1,
 }

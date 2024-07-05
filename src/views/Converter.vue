@@ -20,6 +20,10 @@
                     :dataBag="feltArrayComp"
                     title="felt array:"
                 />
+                <SimpleCopyComponent
+                    :dataBag="byteArrayComp"
+                    title="byte array:"
+                />
                 <ToggleComponent :dataBag="outSelectorComp" title="selector:" />
                 <ToggleComponent
                     :dataBag="out256Comp"
@@ -90,9 +94,11 @@ export default {
                 .slice(0, -1)
             return { val }
         },
+        byteArrayComp() {
+            return { val: utils.toByteArray(this.input) }
+        },
         outSelectorComp() {
             const val = utils.toSelector(this.input)
-            console.log(val)
             const inFmt = !utils.isDecimal(this.input) && !this.isHexInput()
             const test = new BN(utils.toBN(val))
             const valid = this.isLessThanMaxVal(test)
