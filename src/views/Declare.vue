@@ -45,7 +45,7 @@
                         loading
                     "
                     class="btn col-12"
-                    @click="connectWallet"
+                    @click="connectWalletAndDeclare"
                 >
                     Connect && Declare
                 </button>
@@ -81,7 +81,7 @@ export default {
         Multiselect,
     },
     methods: {
-        async connectWallet() {
+        async connectWalletAndDeclare() {
             this.loading = true
             try {
                 const { wallet } = await connect()
@@ -114,7 +114,6 @@ export default {
                         const { classHash: ch } = extractContractHashes(payload)
                         classHash = ch
                     } catch (e) {
-                        console.log(e)
                         this.error = 'Invalid files format'
                         this.loading = false
                         this.files = ''
@@ -126,18 +125,17 @@ export default {
                         this.loading = false
                         return
                     } catch (e) {
-                        const {
-                            class_hash,
-                            transaction_hash,
-                        } = await wallet.account.declare(payload)
-                        console.log(transaction_hash)
+                        const { class_hash } = await wallet.account.declare(
+                            payload
+                        )
                         this.result = class_hash
                         this.loading = false
+                        return
                     }
                 }
             } catch (e) {
                 this.loading = false
-                console.error(e)
+                return
             }
         },
         async previewFiles(e) {
