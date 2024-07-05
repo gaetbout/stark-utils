@@ -50,7 +50,7 @@
                     class="btn col-12"
                     @click="connectWalletAndDeclare"
                 >
-                    Connect && Declare
+                    {{ loading ? 'Processing...' : 'Connect && Declare' }}
                 </button>
             </div>
             <div v-else>
