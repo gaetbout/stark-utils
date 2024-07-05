@@ -99,5 +99,7 @@ input::file-selector-button:hover {
     border: none;
     padding: 5px 15px;
     margin-right: 10px;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
 }
 </style>
