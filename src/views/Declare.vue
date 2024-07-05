@@ -31,15 +31,18 @@
             </div>
             <Multiselect
                 :canClear="false"
-                v-model="network"
-                :options="['Mainnet', 'Sepolia']"
+                v-model="chainId"
+                :options="[
+                    { value: 'SN_MAIN', label: 'Mainnet' },
+                    { value: 'SN_SEPOLIA', label: 'Sepolia' },
+                ]"
             />
             <div v-if="!result">
                 <br />
                 <button
                     :disabled="
                         error ||
-                        !network ||
+                        !chainId ||
                         !files ||
                         files.length != 2 ||
                         loading
@@ -74,7 +77,7 @@
 <script>
 import { connect } from 'starknetkit'
 import Multiselect from '@vueform/multiselect'
-import { extractContractHashes } from 'starknet'
+import { extractContractHashes, constants } from 'starknet'
 
 export default {
     components: {
@@ -83,60 +86,67 @@ export default {
     methods: {
         async connectWalletAndDeclare() {
             this.loading = true
+            let wallet
             try {
-                const { wallet } = await connect()
-                const currentNetwork =
-                    this.network == 'Mainnet' ? 'SN_MAIN' : 'SN_SEPOLIA'
-                if (currentNetwork == 'SN_SEPOLIA') {
-                    this.path = 'sepolia.'
-                }
-                if (wallet.chainId != currentNetwork) {
-                    try {
-                        await window.starknet.request({
-                            type: 'wallet_switchStarknetChain',
-                            params: {
-                                chainId: currentNetwork,
-                            },
-                        })
-                    } catch (e) {
-                        this.error = 'Failed to switch network'
-                        this.loading = false
-                        this.files = ''
-                        return
-                    }
-                }
-                if (wallet && wallet.isConnected) {
-                    const casm = JSON.parse(await this.files[0].text())
-                    const contract = JSON.parse(await this.files[1].text())
-                    const payload = { casm, contract }
-                    let classHash
-                    try {
-                        const { classHash: ch } = extractContractHashes(payload)
-                        classHash = ch
-                    } catch (e) {
-                        this.error = 'Invalid files format'
-                        this.loading = false
-                        this.files = ''
-                        return
-                    }
-                    try {
-                        await wallet.provider.getClassByHash(classHash)
-                        this.result = classHash
-                        this.loading = false
-                        return
-                    } catch (e) {
-                        const { class_hash } = await wallet.account.declare(
-                            payload
-                        )
-                        this.result = class_hash
-                        this.loading = false
-                        return
-                    }
-                }
+                const { wallet: w } = await connect()
+                wallet = w
             } catch (e) {
                 this.loading = false
                 return
             }
+
+            if (
+                !wallet ||
+                !wallet.isConnected ||
+                !(await this.switchChainId(wallet))
+            ) {
+                this.loading = false
+                return
+            }
+            const casm = JSON.parse(await this.files[0].text())
+            const contract = JSON.parse(await this.files[1].text())
+            const payload = { casm, contract }
+            let classHash
+            try {
+                const { classHash: ch } = extractContractHashes(payload)
+                classHash = ch
+            } catch (e) {
+                this.error = 'Invalid files format'
+                this.loading = false
+                this.files = ''
+                return
+            }
+            try {
+                await wallet.provider.getClassByHash(classHash)
+                this.result = classHash
+                this.loading = false
+                return
+            } catch (e) {
+                const { class_hash } = await wallet.account.declare(payload)
+                this.result = class_hash
+                this.loading = false
+                return
+            }
+        },
+        async switchChainId(wallet) {
+            if (this.chainId == constants.NetworkName.SN_SEPOLIA) {
+                this.path = 'sepolia.'
+            } else {
+                this.path = ''
+            }
+            if (wallet.chainId != this.chainId) {
+                try {
+                    await window.starknet.request({
+                        type: 'wallet_switchStarknetChain',
+                        params: {
+                            chainId: this.chainId,
+                        },
+                    })
+                } catch (e) {
+                    return false
+                }
+            }
+            return true
         },
         async previewFiles(e) {
             this.files = []
@@ -149,7 +159,7 @@ export default {
                 this.error = 'Require exactly 2 files'
                 return
             }
-            const files = [e.target.files[0], e.target.files[1]]
+            const files = [...e.target.files]
             const compiledContractClass = files.find((f) =>
                 f.name.endsWith('.compiled_contract_class.json')
             )
@@ -179,7 +189,7 @@ export default {
     },
     data() {
         return {
-            network: 'Mainnet',
+            chainId: 'SN_MAIN',
             error: '',
             path: '',
             result: '',
