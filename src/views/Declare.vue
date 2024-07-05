@@ -36,6 +36,7 @@
                     { value: 'SN_MAIN', label: 'Mainnet' },
                     { value: 'SN_SEPOLIA', label: 'Sepolia' },
                 ]"
+                @select="updateChainId"
             />
             <div v-if="!result">
                 <br />
@@ -127,6 +128,11 @@ export default {
                 this.loading = false
                 return
             }
+        },
+        updateChainId() {
+            this.loading = false
+            this.error = ''
+            this.result = ''
         },
         async switchChainId(wallet) {
             if (this.chainId == constants.NetworkName.SN_SEPOLIA) {
