@@ -57,6 +57,10 @@ export default {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.hoverPointerOut:hover {
+    cursor: ne-resize !important;
+}
+
 .main-content {
     background: var(--main-color);
 }

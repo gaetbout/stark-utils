@@ -34,27 +34,38 @@
                 v-model="network"
                 :options="['Mainnet', 'Sepolia']"
             />
-            <br />
-            <button
-                :disabled="error || !network || !files || files.length != 2"
-                class="btn col-12"
-                @click="connectWallet"
-            >
-                Connect && Declare
-            </button>
-            <br />
-            <br />
-            <div v-if="result" class="alert alert-success" role="alert">
+            <div v-if="!result">
+                <br />
+                <button
+                    :disabled="
+                        error ||
+                        !network ||
+                        !files ||
+                        files.length != 2 ||
+                        loading
+                    "
+                    class="btn col-12"
+                    @click="connectWallet"
+                >
+                    Connect && Declare
+                </button>
+            </div>
+            <div v-else>
+                <br />
+
                 <a
                     :href="
                         'https://' +
                         path +
                         'voyager.online/class/' +
                         result +
-                        'x#deploy'
+                        '#deploy'
                     "
                     target="_blank"
-                    >Deploy it here
+                >
+                    <button class="hoverPointerOut btn col-12">
+                        Deploy using Voyager
+                    </button>
                 </a>
             </div>
         </div>
@@ -63,6 +74,7 @@
 <script>
 import { connect } from 'starknetkit'
 import Multiselect from '@vueform/multiselect'
+import { extractContractHashes } from 'starknet'
 
 export default {
     components: {
@@ -70,6 +82,7 @@ export default {
     },
     methods: {
         async connectWallet() {
+            this.loading = true
             try {
                 const { wallet } = await connect()
                 const currentNetwork =
@@ -78,32 +91,59 @@ export default {
                     this.path = 'sepolia.'
                 }
                 if (wallet.chainId != currentNetwork) {
-                    // TODO TRY CATCH THIS
-                    await window.starknet.request({
-                        type: 'wallet_switchStarknetChain',
-                        params: {
-                            chainId: currentNetwork,
-                        },
-                    })
+                    try {
+                        await window.starknet.request({
+                            type: 'wallet_switchStarknetChain',
+                            params: {
+                                chainId: currentNetwork,
+                            },
+                        })
+                    } catch (e) {
+                        this.error = 'Failed to switch network'
+                        this.loading = false
+                        this.files = ''
+                        return
+                    }
                 }
                 if (wallet && wallet.isConnected) {
                     const casm = JSON.parse(await this.files[0].text())
                     const contract = JSON.parse(await this.files[1].text())
-                    // TODO Check already declared
-                    // https://github.com/starknet-io/starknet.js/blob/d2fb60effaa2f6c50fdfd596699c2742d4f5756c/src/account/default.ts#L377
-                    const {
-                        class_hash,
-                        transaction_hash,
-                    } = await wallet.account.declare({ casm, contract })
-                    console.log(transaction_hash)
-                    this.result = class_hash
+                    const payload = { casm, contract }
+                    let classHash
+                    try {
+                        const { classHash: ch } = extractContractHashes(payload)
+                        classHash = ch
+                    } catch (e) {
+                        console.log(e)
+                        this.error = 'Invalid files format'
+                        this.loading = false
+                        this.files = ''
+                        return
+                    }
+                    try {
+                        await wallet.provider.getClassByHash(classHash)
+                        this.result = classHash
+                        this.loading = false
+                        return
+                    } catch (e) {
+                        const {
+                            class_hash,
+                            transaction_hash,
+                        } = await wallet.account.declare(payload)
+                        console.log(transaction_hash)
+                        this.result = class_hash
+                        this.loading = false
+                    }
                 }
             } catch (e) {
+                this.loading = false
                 console.error(e)
             }
         },
         async previewFiles(e) {
             this.files = []
+            this.result = ''
+            this.loading = false
             if (e.target.files.length == 0) {
                 return
             }
@@ -146,6 +186,7 @@ export default {
             path: '',
             result: '',
             files: '',
+            loading: false,
         }
     },
 }
