@@ -80,4 +80,24 @@ button:hover {
     background-color: var(--secondary-color-hover) !important;
     border-color: var(--secondary-color-hover) !important;
 }
+
+input::file-selector-button {
+    color: var(--font-white-color) !important;
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+}
+
+input::file-selector-button:hover {
+    color: var(--font-white-color-hover) !important;
+    background-color: var(--secondary-color-hover) !important;
+    border-color: var(--secondary-color-hover) !important;
+    cursor: pointer;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+}
 </style>
