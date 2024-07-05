@@ -36,14 +36,28 @@
             />
             <br />
             <button
-                :disabled="error || !network"
+                :disabled="error || !network || !files || files.length != 2"
                 class="btn col-12"
                 @click="connectWallet"
             >
-                Connect
+                Connect && Declare
             </button>
+            <br />
+            <br />
+            <div v-if="result" class="alert alert-success" role="alert">
+                <a
+                    :href="
+                        'https://' +
+                        path +
+                        'voyager.online/class/' +
+                        result +
+                        'x#deploy'
+                    "
+                    target="_blank"
+                    >Deploy it here
+                </a>
+            </div>
         </div>
-        <!-- You can deploy at https://voyager.online/class/0x06dcdd56f064b6c04ef13dbdaa55b896e9d651cbb1d25e6aae20ea3dfa2140e5#deploy -->
     </div>
 </template>
 <script>
@@ -58,15 +72,34 @@ export default {
         async connectWallet() {
             try {
                 const { wallet } = await connect()
-                console.log('wallet.selectedAddress')
-                console.log(wallet)
+                const currentNetwork =
+                    this.network == 'Mainnet' ? 'SN_MAIN' : 'SN_SEPOLIA'
+                if (currentNetwork == 'SN_SEPOLIA') {
+                    this.path = 'sepolia.'
+                }
+                if (wallet.chainId != currentNetwork) {
+                    // TODO TRY CATCH THIS
+                    await window.starknet.request({
+                        type: 'wallet_switchStarknetChain',
+                        params: {
+                            chainId: currentNetwork,
+                        },
+                    })
+                }
                 if (wallet && wallet.isConnected) {
-                    // setConnection(wallet)
-                    // setProvider(wallet.account)
-                    // setAddress(wallet.selectedAddress)
+                    const casm = JSON.parse(await this.files[0].text())
+                    const contract = JSON.parse(await this.files[1].text())
+                    // TODO Check already declared
+                    // https://github.com/starknet-io/starknet.js/blob/d2fb60effaa2f6c50fdfd596699c2742d4f5756c/src/account/default.ts#L377
+                    const {
+                        class_hash,
+                        transaction_hash,
+                    } = await wallet.account.declare({ casm, contract })
+                    console.log(transaction_hash)
+                    this.result = class_hash
                 }
             } catch (e) {
-                // console.error(e)
+                console.error(e)
             }
         },
         async previewFiles(e) {
@@ -78,9 +111,9 @@ export default {
                 this.error = 'Require exactly 2 files'
                 return
             }
-            const files = [e.target.files[0].name, e.target.files[1].name]
+            const files = [e.target.files[0], e.target.files[1]]
             const compiledContractClass = files.find((f) =>
-                f.endsWith('.compiled_contract_class.json')
+                f.name.endsWith('.compiled_contract_class.json')
             )
             if (!compiledContractClass) {
                 this.error = "Missing '*.compiled_contract_class.json' file"
@@ -88,7 +121,7 @@ export default {
             }
 
             const contractClass = files.find((f) =>
-                f.endsWith('.contract_class.json')
+                f.name.endsWith('.contract_class.json')
             )
             if (!contractClass) {
                 this.error = "Missing '*.contract_class.json' file"
@@ -96,20 +129,22 @@ export default {
             }
 
             if (
-                compiledContractClass.split('.')[0] !=
-                contractClass.split('.')[0]
+                compiledContractClass.name.split('.')[0] !=
+                contractClass.name.split('.')[0]
             ) {
                 this.error = 'Files do not match'
                 return
             }
             this.error = ''
-            this.files = e.target.files
+            this.files = [compiledContractClass, contractClass]
         },
     },
     data() {
         return {
             network: 'Mainnet',
             error: '',
+            path: '',
+            result: '',
             files: '',
         }
     },
