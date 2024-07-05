@@ -99,7 +99,7 @@ export default {
             if (
                 !wallet ||
                 !wallet.isConnected ||
-                !(await this.switchChainId(wallet))
+                !(await this.requestSwitchChainId(wallet))
             ) {
                 this.loading = false
                 return
@@ -134,7 +134,7 @@ export default {
             this.error = ''
             this.result = ''
         },
-        async switchChainId(wallet) {
+        async requestSwitchChainId(wallet) {
             if (this.chainId == constants.NetworkName.SN_SEPOLIA) {
                 this.path = 'sepolia.'
             } else {
