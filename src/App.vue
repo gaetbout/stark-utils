@@ -42,11 +42,23 @@ export default {
     --toggle-text-on: var(--font-white-color);
     --toggle-text-off: var(--font-white-color);
     --toggle-ring-color: var(--font-white-color);
+    /* Styling multiselect on Declare */
+    --ms-option-bg-selected: var(--secondary-color);
+    --ms-option-bg-selected-hover: var(--main-color);
+    --ms-option-bg-selected-pointed: var(--main-color);
+    --ms-option-bg-pointed: var(--main-color);
+    --ms-option-color-pointed: var(--font-white-color);
+    --ms-border-color-active: var(--secondary-color);
+    --ms-ring-color: rgba(var(--secondary-color));
 }
 
 #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.hoverPointerOut:hover {
+    cursor: ne-resize !important;
 }
 
 .main-content {
@@ -71,5 +83,27 @@ button:hover {
     color: var(--font-white-color-hover) !important;
     background-color: var(--secondary-color-hover) !important;
     border-color: var(--secondary-color-hover) !important;
+}
+
+input::file-selector-button {
+    color: var(--font-white-color) !important;
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+}
+
+input::file-selector-button:hover {
+    color: var(--font-white-color-hover) !important;
+    background-color: var(--secondary-color-hover) !important;
+    border-color: var(--secondary-color-hover) !important;
+    cursor: pointer;
+    border: none;
+    padding: 5px 15px;
+    margin-right: 10px;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
 }
 </style>
