@@ -6,9 +6,15 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // Icons
-import { faHashtag, faRightLeft } from '@fortawesome/free-solid-svg-icons'
+import {
+    faHashtag,
+    faRightLeft,
+    faFileContract,
+} from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-library.add(faHashtag, faRightLeft)
+library.add(faHashtag)
+library.add(faRightLeft)
+library.add(faFileContract)
 library.add(faGithub)
 
 import './assets/scss/argon.scss'
