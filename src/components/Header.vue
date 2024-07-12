@@ -8,7 +8,6 @@
                     /></router-link>
                     <router-link to="/converter">Converter</router-link>
                     <router-link to="/hash">Hash</router-link>
-                    <router-link to="/declare">Declare</router-link>
                     <div class="topnav-right">
                         <a
                             href="https://github.com/gaetbout/stark-utils"

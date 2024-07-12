@@ -1,5 +1,5 @@
 import BN from 'bn.js'
-import { hash } from 'starknet'
+import { hash, byteArray, CallData } from 'starknet'
 
 function asciiToHex(str) {
     let arr1 = ['0x']
@@ -15,6 +15,13 @@ function toSelector(val) {
         return ''
     }
     return toBN(hash.getSelectorFromName(val))
+}
+
+function toByteArray(val) {
+    if (!val) {
+        return ''
+    }
+    return CallData.compile(byteArray.byteArrayFromString(val)).toString()
 }
 
 function toBN(val) {
@@ -113,6 +120,7 @@ export default {
     toBig3,
     isDecimal,
     toHex,
+    toByteArray,
     toSelector,
     startWith0xAndIsHex,
 }
