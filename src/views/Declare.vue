@@ -8,6 +8,13 @@
         </div>
         <div class="card-body px-lg-5">
             <br />
+            Please make sure your Scarb.toml has these lines:<br />
+            <!-- Div with a "code" font -->
+            <div style="font-family:'Times New Roman'">
+                [[target.starknet-contract]]<br />
+                casm = true
+            </div>
+            <br />
             <input
                 type="file"
                 @change="previewFiles"

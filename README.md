@@ -19,8 +19,6 @@ It allows to:
 
 ## TODO list
 
--   Add a page with infos such as MAX_FELT, table of power of 2, list of BIG tokens and their address (ETH, DAI, USDC, USDT, ... WITH A WARNING TO ALWAYS DOUBLE CHECK THOSE) other stuff?
--   Figure out what does the page Signature and rename if needed and rework code
 -   Modal to explain each page
 -   Some packages are obsolete, get rid of bootstrap ==> restart from a blank project and rebuild it
 -   Do "About" page with link to github
