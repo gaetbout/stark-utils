@@ -95,7 +95,6 @@ export default {
             const intValues = this.input
                 ? utils.toByteArray(this.input).split(',')
                 : []
-            console.log(intValues)
             return {
                 intValues,
                 hexValues: intValues.map((val) =>
