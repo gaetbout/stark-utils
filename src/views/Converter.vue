@@ -20,10 +20,7 @@
                     :dataBag="feltArrayComp"
                     title="felt array:"
                 />
-                <SimpleCopyComponent
-                    :dataBag="byteArrayComp"
-                    title="byte array:"
-                />
+                <ToggleComponent :dataBag="byteArrayComp" title="byte array:" />
                 <ToggleComponent :dataBag="outSelectorComp" title="selector:" />
                 <ToggleComponent
                     :dataBag="out256Comp"
@@ -95,7 +92,17 @@ export default {
             return { val }
         },
         byteArrayComp() {
-            return { val: utils.toByteArray(this.input) }
+            const intValues = this.input
+                ? utils.toByteArray(this.input).split(',')
+                : []
+            console.log(intValues)
+            return {
+                intValues,
+                hexValues: intValues.map((val) =>
+                    utils.addHexPrefix(Number(val).toString(16))
+                ),
+                valid: true,
+            }
         },
         outSelectorComp() {
             const val = utils.toSelector(this.input)
