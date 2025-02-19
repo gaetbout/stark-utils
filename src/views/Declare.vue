@@ -10,7 +10,7 @@
             <br />
             Please make sure your Scarb.toml has these lines:<br />
             <!-- Div with a "code" font -->
-            <div style="font-family:'Times New Roman'">
+            <div style="font-family: 'Times New Roman'">
                 [[target.starknet-contract]]<br />
                 casm = true
             </div>

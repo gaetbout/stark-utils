@@ -10,12 +10,14 @@ import {
     faHashtag,
     faRightLeft,
     faFileContract,
+    faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 library.add(faHashtag)
 library.add(faRightLeft)
 library.add(faFileContract)
 library.add(faGithub)
+library.add(faCircleCheck)
 
 import './assets/scss/argon.scss'
 
